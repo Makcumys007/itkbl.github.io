@@ -12,15 +12,34 @@
   <title>Send Message</title>
 </head>
 
-<body>
+<body class="bg-dark">
+
+    
+
     <nav class="navbar fixed-top navbar-dark bg-light">
-        <a href="https://www.kazminerals.com/" target="_blank" class="navbar-brand"><img src="img/logo.png" width="100"></a>
+        <div class="container">
+            <a href="https://www.kazminerals.com/" target="_blank" class="navbar-brand"><img src="img/logo.png" width="100"></a>
+            <h3 class="ml-auto text-info display-5">IT KBL</h3>
+        </div>
     </nav>
 
-    <div class="container">
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input class="form-control" type="text" id="name" placeholder="Enter name">
+    <div class="home">
+        <div class="container">
+            <div class="form-group">
+                <label class="text-light" for="name">Full Name</label>
+                <input class="form-control" type="text" id="name" placeholder="Enter name lastname">                
+            </div>
+            <div class="form-group">
+                <label class="text-light" for="name">Subject</label>
+                <input class="form-control" type="text" id="subject" placeholder="Enter subject">
+            </div>
+            <div class="form-group">
+                <label class="text-light" for="name">Message</label>
+                <textarea name="email" id="email" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-outline-light btn-block">Send</button>
+            </div>
         </div>
     </div>
 
