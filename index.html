@@ -45,6 +45,25 @@
                 <button class="btn btn-outline-light btn-block">Send</button>
             </div>
         </div>
+
+        <div id="ru-form" class="container">
+            <div class="form-group">
+                <label class="text-light" for="name">Имя Фамилия (английскими буквами)</label>
+                <input class="form-control" type="text" id="name" placeholder="Имя Фамилия">                
+            </div>
+            <div class="form-group">
+                <label class="text-light" for="name">Тема</label>
+                <input class="form-control" type="text" id="subject" placeholder="Тема">
+            </div>
+            <div class="form-group">
+                <label class="text-light" for="name">Сообщение</label>
+                <textarea name="email" id="email" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-outline-light btn-block">Send</button>
+            </div>
+        </div>
+
     </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -63,7 +82,7 @@
 
         ruBtn.addEventListener("click", ()=> {
            document.getElementById("en-form").style.display = "none"; 
-           document.getElementById("ru").style.display = "btn btn-dark";
+           document.getElementById("ru-form").style.display = "block"; 
 
            ruBtn.classList.remove("btn-outline-dark");
            ruBtn.classList.add("btn-dark");
@@ -74,7 +93,15 @@
 
 
         enBtn.addEventListener("click", () => {
+           
+           document.getElementById("ru-form").style.display = "none"; 
+           document.getElementById("en-form").style.display = "block"; 
+         
 
+           ruBtn.classList.remove("btn-dark");
+           ruBtn.classList.add("btn-outline-dark");
+           enBtn.classList.remove("btn-outline-dark");
+           enBtn.classList.add("btn-dark");
         });
 
 
