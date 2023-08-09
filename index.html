@@ -19,12 +19,16 @@
     <nav class="navbar fixed-top navbar-dark bg-light">
         <div class="container">
             <a href="https://www.kazminerals.com/" target="_blank" class="navbar-brand"><img src="img/logo.png" width="100"></a>
-            <h3 class="ml-auto text-info display-5">IT KBL</h3>
+            
+            <div class="ml-auto">
+                <input type="submit" id="ru" class="btn btn-outline-dark" value="Ru">
+                <input type="submit" id="en" class="btn btn-dark " value="En">
+            </div>
         </div>
     </nav>
 
     <div class="home">
-        <div class="container">
+        <div id="en-form" class="container">
             <div class="form-group">
                 <label class="text-light" for="name">Full Name</label>
                 <input class="form-control" type="text" id="name" placeholder="Enter name lastname">                
@@ -52,7 +56,14 @@
     <!-- Telegram Bot Settings -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
-    <script></script>
+    <script>
+        let tg = window.Telegram.WebApp;
+        let ruBtn = document.getElementById("ru");
+        ruBtn.addEventListener("click", ()=> {
+           document.getElementById("en-form").style.display = "none"; 
+           document.getElementById("en-form").style.display = "none";
+        });
+    </script>
 
 </body>
 

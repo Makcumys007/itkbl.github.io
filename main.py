@@ -45,17 +45,23 @@ async def start(message: types.Message):
     markup.row(btn2)
     btn3 = types.InlineKeyboardButton(post, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/index.html'))
     markup.row(btn3)
-    logo = open('logo.png', 'rb')
+    logo = open('./img/logo.png', 'rb')
     await message.answer_photo(logo)
     await message.answer(hello)
    # time.sleep(5)
     await message.answer(service, reply_markup=markup)
 
 
+@dp.message_handler()
+async def echo(message: types.Message):
+    await message.answer(f'/run')
+
 @dp.callback_query_handler()
 async def callback(call):
     if call.data == 'call':
         await call.message.answer(f'+77750111911')
+    
+
   
     
 
