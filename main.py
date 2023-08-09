@@ -43,7 +43,7 @@ async def start(message: types.Message):
     markup.row(btn1)    
     btn2 = types.InlineKeyboardButton(call, callback_data='call')
     markup.row(btn2)
-    btn3 = types.InlineKeyboardButton(post, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/'))
+    btn3 = types.InlineKeyboardButton(post, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/index.html'))
     markup.row(btn3)
     logo = open('logo.png', 'rb')
     await message.answer_photo(logo)
