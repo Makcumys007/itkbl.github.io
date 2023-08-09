@@ -59,10 +59,25 @@
     <script>
         let tg = window.Telegram.WebApp;
         let ruBtn = document.getElementById("ru");
+        let enBtn = document.getElementById("en");
+
         ruBtn.addEventListener("click", ()=> {
            document.getElementById("en-form").style.display = "none"; 
            document.getElementById("ru").style.display = "btn btn-dark";
+
+           ruBtn.classList.remove("btn-outline-dark");
+           ruBtn.classList.add("btn-dark");
+           enBtn.classList.remove("btn-dark");
+           enBtn.classList.add("btn-outline-dark");
+
         });
+
+
+        enBtn.addEventListener("click", () => {
+
+        });
+
+
     </script>
 
 </body>
