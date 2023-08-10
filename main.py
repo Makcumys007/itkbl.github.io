@@ -23,6 +23,7 @@ post = ''
 name =''
 subject = ''
 sent = ''
+start_run = ''
 
 @dp.message_handler(commands=['start','run'])
 async def start(message: types.Message):
@@ -125,10 +126,18 @@ async def callback(call):
 
 @dp.message_handler()
 async def echo(message: types.Message):
+
+
+    if language == 'en':
+        start_run = 'To get the menu, press /start'           
+    else:
+        start_run = 'Для получения меню, нажмите /start'  
+
+
     if message.text == 'Call back IT Service Desk' or message.text == 'Позвонить в IT Service Desk':
         await message.answer(f'+77750111911')
     else:        
-        await message.answer(f'/run')
+        await message.answer(f'{start_run}')
 
   
     
