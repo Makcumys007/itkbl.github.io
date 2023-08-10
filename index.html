@@ -119,21 +119,27 @@
             
             if (name.length < 5 && isRu) {
                 error.innerText = 'Вы не правильно ввели Имя и Фамилию';
+                return;
             } else if (name.length < 5 && isEn) {
                 error.innerText = 'You entered your first and last name incorrectly';
+                return;
             }
 
 
             if (subject.length < 3 && isRu) {
                 error.innerText = 'Слишком короткая тема письма';
+                return;
             } else if (subject.length < 3 && isEn) {
                 error.innerText = 'Email subject too short';
+                return;
             }
 
             if (email.length < 5 && isRu) {
                 error.innerText = 'Слишком короткое содержание письма';
+                return;
             } else if (email.length < 5 && isEn) {
                 error.innerText = 'The content of the letter is too short';
+                return;
             }
             
             // Sending data to telegram bot
