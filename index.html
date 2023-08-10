@@ -79,6 +79,8 @@
         let tg = window.Telegram.WebApp;
         let ruBtn = document.getElementById("ru");
         let enBtn = document.getElementById("en");
+        // Open full screen mode on smartphone
+        tg.expand()
 
         ruBtn.addEventListener("click", ()=> {
            document.getElementById("en-form").style.display = "none"; 
