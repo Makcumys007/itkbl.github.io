@@ -1,6 +1,10 @@
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types.web_app_info import WebAppInfo
 import json 
+import smtplib, ssl
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 TOKEN = '5994379087:AAHP4nVkE9CBW1lzjliu6fLPoa57dP7R3ko'
 
@@ -59,7 +63,49 @@ async def web_app(message: types.Message):
     name = result["name"]
     subject = result["subject"]
     subject = result["email"]
-    await message.answer(f'{name}')
+
+    text_message = """
+    Subject: {subject}
+    """
+
+    SMTP_SERVER = "smtp.office365.com"
+    PORT = 587  # For starttls
+    MY_ADDRESS = "IT.KBL.Duty2day@outlook.com"
+    PASSWORD = "Kazmin23"
+
+    RECIVER_ADDRESS = "maxim.abylkassov@kazminerals.com"
+
+     # Create a secure SSL context
+    context = ssl.create_default_context()
+
+    # Try to log in to server and send email
+    try:
+        server = smtplib.SMTP(SMTP_SERVER,PORT)
+        server.ehlo() # Can be omitted
+        server.starttls(context=context) # Secure the connection
+        server.ehlo() # Can be omitted
+        server.login(MY_ADDRESS, PASSWORD)
+
+        msg = MIMEMultipart()       # create a message
+
+        msg['From']=MY_ADDRESS
+        msg['To']=RECIVER_ADDRESS
+        msg['Subject']="This is TEST"
+
+        server.send_message(msg)
+
+
+    except Exception as e:
+        # Print any error messages to stdout
+        print(e)
+    finally:
+        server.quit()
+
+
+
+   # await message.answer(f'{name}')
+
+    await message.answer(message.from_user)
 
 
 
