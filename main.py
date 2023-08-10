@@ -22,6 +22,7 @@ call = ''
 post = ''
 name =''
 subject = ''
+sent = ''
 
 @dp.message_handler(commands=['start','run'])
 async def start(message: types.Message):
@@ -34,7 +35,7 @@ async def start(message: types.Message):
         reset = 'Reset password'
         service = 'Our services'
         call = 'Call back'     
-        post = 'Email us'   
+        post = 'Email us'           
     else:
         hello = 'Добро пожаловать в бот IT KBL!\nМы поможем вам в решении ваших проблем... '
         reset = 'Сбросить пароль'
@@ -59,14 +60,18 @@ async def start(message: types.Message):
 
 @dp.message_handler(content_types=['web_app_data'])
 async def web_app(message: types.Message):
+
+    if language == 'en':
+        sent = 'Your request has been received! Thank you!'
+    else:
+        sent = 'Ваше обращение получено! Спасибо!'
+
     result = json.loads(message.web_app_data.data) 
     name = result["name"]
     subject = result["subject"]
-    subject = result["email"]
+    text_message = result["email"]
 
-    text_message = """
-    Subject: {subject}
-    """
+     
 
     SMTP_SERVER = "smtp.office365.com"
     PORT = 587  # For starttls
@@ -90,9 +95,9 @@ async def web_app(message: types.Message):
 
         msg['From']=MY_ADDRESS
         msg['To']=RECIVER_ADDRESS
-        msg['Subject']="This is TEST"
+        msg['Subject']=f'{name} - {subject}'
 
-        msg.attach(MIMEText('plain'))
+        msg.attach(MIMEText(f'{name} \n {text_message}'))
 
         server.send_message(msg)
 
@@ -107,7 +112,7 @@ async def web_app(message: types.Message):
 
    # await message.answer(f'{name}')
 
-    await message.answer(message.from_user)
+    await message.answer(sent)
 
 
 
