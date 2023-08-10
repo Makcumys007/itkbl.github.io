@@ -34,13 +34,13 @@ async def start(message: types.Message):
         hello = 'Welcome to the IT KBL bot!\nWe will help you solve your problems...'
         reset = 'Reset password'
         service = 'Our services'
-        call = 'Call back'     
+        call = 'Call back IT Service Desk'     
         post = 'Email us'           
     else:
         hello = 'Добро пожаловать в бот IT KBL!\nМы поможем вам в решении ваших проблем... '
         reset = 'Сбросить пароль'
         service = 'Наши сервисы'
-        call = 'Позвонить нам'
+        call = 'Позвонить в IT Service Desk'
         post = 'Написать нам'
 
    # markup = types.InlineKeyboardMarkup()
@@ -125,7 +125,7 @@ async def callback(call):
 
 @dp.message_handler()
 async def echo(message: types.Message):
-    if message.text == 'Call back':
+    if message.text == 'Call back IT Service Desk' or message.text == 'Позвонить в IT Service Desk':
         await message.answer(f'+77750111911')
     else:        
         await message.answer(f'/run')
