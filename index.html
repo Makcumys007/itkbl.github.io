@@ -44,6 +44,7 @@
             <div class="form-group">
                 <button id="send" class="btn btn-outline-light btn-block">Send</button>
             </div>
+            <div id="error"></div>
         </div>
 
         <div id="ru-form" class="container">
@@ -62,6 +63,7 @@
             <div class="form-group">
                 <button id="send" class="btn btn-outline-light btn-block">Отправить</button>
             </div>
+            <div id="error"></div>
         </div>
 
     </div>
@@ -110,9 +112,23 @@
         });
 
         app.addEventListener("click", () => {
+            document.getElementById("error").innerText = "";
             let name = document.getElementById("name").value;
             let subject = document.getElementById("subject").value;
             let email = document.getElementById("email").value;
+            
+            if(name.length < 5) {
+                document.getElementById("error").innerText = 'Имя должно быть длинее 5 символов';
+                return;
+            }
+            // Sending data to telegram bot
+            let data = {
+                name: name,
+                subject: subject,
+                email: email
+            }
+
+            tg.sendData(JSON.stringify(data));
 
             tg.close();
         });
