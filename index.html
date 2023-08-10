@@ -43,9 +43,10 @@
             </div>
             <div class="form-group">
                 <input type="submit" id="send" class="btn btn-outline-light btn-block" value="Отправить">
-            </div>            
-        </div>       
-        <div id="error"></div>
+            </div>  
+            
+            <div id="error" class="text-danger"></div>
+        </div>    
     </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -64,6 +65,8 @@
         let enBtn = document.getElementById("en");
         let sendBtn = document.getElementById("send");
 
+        let error = document.getElementById("error");
+
         let isRu = true
         let isEn = false
 
@@ -71,6 +74,8 @@
         tg.expand()
 
         ruBtn.addEventListener("click", ()=> {
+
+           error.innerText = ''
 
            isEn = false
            isRu = true 
@@ -89,6 +94,8 @@
 
 
         enBtn.addEventListener("click", () => {
+
+           error.innerText = ''
 
            isEn = true
            isRu = false 
@@ -110,7 +117,24 @@
             let subject = document.getElementById("subject").value;
             let email = document.getElementById("email").value;
             
-          
+            if (name.length < 5 && isRu) {
+                error.innerText = 'Вы не правильно ввели Имя и Фамилию';
+            } else if (name.length < 5 && isEn) {
+                error.innerText = 'You entered your first and last name incorrectly';
+            }
+
+
+            if (subject.length < 3 && isRu) {
+                error.innerText = 'Слишком короткая тема письма';
+            } else if (subject.length < 3 && isEn) {
+                error.innerText = 'Email subject too short';
+            }
+
+            if (email.length < 5 && isRu) {
+                error.innerText = 'Слишком короткое содержание письма';
+            } else if (email.length < 5 && isEn) {
+                error.innerText = 'The content of the letter is too short';
+            }
             
             // Sending data to telegram bot
             let data = {
