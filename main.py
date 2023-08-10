@@ -92,6 +92,8 @@ async def web_app(message: types.Message):
         msg['To']=RECIVER_ADDRESS
         msg['Subject']="This is TEST"
 
+        msg.attach(MIMEText('plain'))
+
         server.send_message(msg)
 
 
