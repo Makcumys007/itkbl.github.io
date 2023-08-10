@@ -31,7 +31,7 @@
         <div class="container">
             <div class="card text-center">
                 <div class="card-body">
-                    <h4 class="card-title">Наши контакты</h4>
+                    <h4 id="contact-title" class="card-title">Наши контакты</h4>
                     <p><a href="#" class="card-text">+77750111911</a></p>
                     <p><a href="#" class="card-text">11911</a></p>
                     <p class="card-text">
@@ -69,10 +69,8 @@
            isEn = false
            isRu = true 
             
-           document.getElementById("label-name").innerText = "Имя Фамили (английскими буквами)" 
-           document.getElementById("label-subject").innerText = "Тема письма" 
-           document.getElementById("label-email").innerText = "Сообщение" 
-           document.getElementById("send").value = "Отправить" 
+           document.getElementById("contact-title").innerText = "Контакты" 
+        
 
            ruBtn.classList.remove("btn-outline-dark");
            ruBtn.classList.add("btn-dark");
@@ -87,10 +85,8 @@
            isEn = true
            isRu = false 
            
-           document.getElementById("label-name").innerText = "Full Name" 
-           document.getElementById("label-subject").innerText = "Subject" 
-           document.getElementById("label-email").innerText = "Message"  
-           document.getElementById("send").value = "Send" 
+           document.getElementById("label-name").innerText = "Contacts" 
+           
 
            ruBtn.classList.remove("btn-dark");
            ruBtn.classList.add("btn-outline-dark");
@@ -98,25 +94,7 @@
            enBtn.classList.add("btn-dark");
         });
 
-        sendBtn.addEventListener("click", () => {
-           
-            let name = document.getElementById("name").value;
-            let subject = document.getElementById("subject").value;
-            let email = document.getElementById("email").value;
-            
-          
-            
-            // Sending data to telegram bot
-            let data = {
-                name: name,
-                subject: subject,
-                email: email
-            }
-
-            tg.sendData(JSON.stringify(data));
-
-            tg.close();
-        });
+       
 
     </script>
 
