@@ -70,8 +70,8 @@ async def web_app(message: types.Message):
 
     SMTP_SERVER = "smtp.office365.com"
     PORT = 587  # For starttls
-    MY_ADDRESS = "IT.KBL.Duty2day@outlook.com"
-    PASSWORD = "Kazmin23"
+    MY_ADDRESS = "itbotkbl@outlook.com"
+    PASSWORD = "qz?}Y8YiP3LDKdX"
 
     RECIVER_ADDRESS = "maxim.abylkassov@kazminerals.com"
 
