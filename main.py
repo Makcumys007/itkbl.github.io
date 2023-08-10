@@ -37,8 +37,8 @@ async def start(message: types.Message):
         call = 'Позвонить нам'
         post = 'Написать нам'
 
-    markup = types.InlineKeyboardMarkup()
-
+  #  markup = types.InlineKeyboardMarkup()
+    markup = types.ReplyKeyboardMarkup()
     btn1 = types.InlineKeyboardButton(reset, web_app=WebAppInfo(url='https://passwordreset.microsoftonline.com/'))
     markup.row(btn1)    
     btn2 = types.InlineKeyboardButton(call, callback_data='call')
