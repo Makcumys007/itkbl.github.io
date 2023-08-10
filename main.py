@@ -57,14 +57,14 @@ async def web_app(message: types.Message):
     await message.answer(message.web_app_data.data)
 
 
-# @dp.message_handler()
-# async def echo(message: types.Message):
-#     await message.answer(f'/run')
+@dp.message_handler()
+async def echo(message: types.Message):
+    await message.answer(f'/run')
 
-@dp.callback_query_handler()
-async def callback(call):
-    if call.data == 'call':
-        await call.message.answer(f'+77750111911')
+# @dp.callback_query_handler()
+# async def callback(call):
+#     if call.data == 'call':
+#         await call.message.answer(f'+77750111911')
     
 
   
