@@ -12,7 +12,7 @@
   <title>Send Message</title>
 </head>
 
-<body class="bg-dark">
+<body id="app" class="bg-dark">
 
     
 
@@ -77,6 +77,7 @@
     
     <script>
         let tg = window.Telegram.WebApp;
+        let app = document.getElementById("app");
         let ruBtn = document.getElementById("ru");
         let enBtn = document.getElementById("en");
         let sendBtn = document.getElementById("send");
@@ -108,8 +109,8 @@
            enBtn.classList.add("btn-dark");
         });
 
-        sendBtn.addEventListener("click", () => {
-            tg.close()
+        app.addEventListener("click", () => {
+            tg.close();
         });
 
     </script>
