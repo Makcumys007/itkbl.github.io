@@ -42,7 +42,7 @@
                 <textarea name="email" id="email" class="form-control"></textarea>
             </div>
             <div class="form-group">
-                <button class="btn btn-outline-light btn-block">Send</button>
+                <button id="send" class="btn btn-outline-light btn-block">Send</button>
             </div>
         </div>
 
@@ -60,7 +60,7 @@
                 <textarea name="email" id="email" class="form-control"></textarea>
             </div>
             <div class="form-group">
-                <button class="btn btn-outline-light btn-block">Отправить</button>
+                <button id="send" class="btn btn-outline-light btn-block">Отправить</button>
             </div>
         </div>
 
@@ -79,6 +79,8 @@
         let tg = window.Telegram.WebApp;
         let ruBtn = document.getElementById("ru");
         let enBtn = document.getElementById("en");
+        let sendBtn = document.getElementById("send");
+
         // Open full screen mode on smartphone
         tg.expand()
 
@@ -106,6 +108,9 @@
            enBtn.classList.add("btn-dark");
         });
 
+        sendBtn.addEventListener("click", () => {
+            tg.close()
+        });
 
     </script>
 
