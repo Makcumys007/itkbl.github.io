@@ -41,8 +41,8 @@ async def start(message: types.Message):
     markup = types.ReplyKeyboardMarkup()
     btn1 = types.InlineKeyboardButton(reset, web_app=WebAppInfo(url='https://passwordreset.microsoftonline.com/'))
     markup.row(btn1)    
-  #  btn2 = types.InlineKeyboardButton(call, callback_data='call')
-    btn2 = types.InlineKeyboardButton(call, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/phone.html'))
+    btn2 = types.InlineKeyboardButton(call, callback_data='call')
+  #  btn2 = types.InlineKeyboardButton(call, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/phone.html'))
     markup.row(btn2)
     btn3 = types.InlineKeyboardButton(post, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/index.html'))
     markup.row(btn3)
@@ -57,15 +57,20 @@ async def web_app(message: types.Message):
     await message.answer(message.web_app_data.data)
 
 
+
+
+@dp.callback_query_handler()
+async def callback(call):
+    if call.data == 'call':
+        await call.message.answer(f'+77750111911')
+    
+
 @dp.message_handler()
 async def echo(message: types.Message):
-    await message.answer(f'/run')
-
-# @dp.callback_query_handler()
-# async def callback(call):
-#     if call.data == 'call':
-#         await call.message.answer(f'+77750111911')
-    
+    if message.text == 'Call back':
+        await message.answer(f'+77750111911')
+    else:        
+        await message.answer(f'/run')
 
   
     
