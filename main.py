@@ -1,5 +1,6 @@
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types.web_app_info import WebAppInfo
+import json 
 
 TOKEN = '5994379087:AAHP4nVkE9CBW1lzjliu6fLPoa57dP7R3ko'
 
@@ -54,7 +55,11 @@ async def start(message: types.Message):
 
 @dp.message_handler(content_types=['web_app_data'])
 async def web_app(message: types.Message):
-    await message.answer(message.web_app_data.data)
+    result = json.loads(message.web_app_data.data) 
+    name = result["name"]
+    subject = result["subject"]
+    subject = result["email"]
+    await message.answer(f'{name}')
 
 
 
