@@ -37,7 +37,7 @@ async def start(message: types.Message):
         call = 'Позвонить нам'
         post = 'Написать нам'
 
-  #  markup = types.InlineKeyboardMarkup()
+   # markup = types.InlineKeyboardMarkup()
     markup = types.ReplyKeyboardMarkup()
     btn1 = types.InlineKeyboardButton(reset, web_app=WebAppInfo(url='https://passwordreset.microsoftonline.com/'))
     markup.row(btn1)    
@@ -51,10 +51,14 @@ async def start(message: types.Message):
    # time.sleep(5)
     await message.answer(service, reply_markup=markup)
 
+@dp.message_handler(content_types=['web_app_data'])
+async def web_app(message: types.Message):
+    await message.answer(message.web_app_data.data)
 
-@dp.message_handler()
-async def echo(message: types.Message):
-    await message.answer(f'/run')
+
+# @dp.message_handler()
+# async def echo(message: types.Message):
+#     await message.answer(f'/run')
 
 @dp.callback_query_handler()
 async def callback(call):
