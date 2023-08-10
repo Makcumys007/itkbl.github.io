@@ -28,41 +28,23 @@
     </nav>
 
     <div class="home">
-        <div id="en-form" class="container">
+        <div id="form" class="container">
             <div class="form-group">
-                <label class="text-light" for="name">Full Name</label>
+                <label id="label-name" class="text-light" for="name">Имя Фамили (английскими буквами)</label>
                 <input class="form-control" type="text" id="name" placeholder="Enter name lastname">                
             </div>
             <div class="form-group">
-                <label class="text-light" for="name">Subject</label>
+                <label id="label-subject" class="text-light" for="name">Тема письма</label>
                 <input class="form-control" type="text" id="subject" placeholder="Enter subject">
             </div>
             <div class="form-group">
-                <label class="text-light" for="name">Message</label>
-                <textarea name="email" id="email" class="form-control"></textarea>
-            </div>
-            <div class="form-group">
-                <input type="submit" id="send" class="btn btn-outline-light btn-block" value="Send">
-            </div>            
-        </div>
-
-        <div id="ru-form" class="container">
-            <div class="form-group">
-                <label class="text-light" for="name">Имя Фамилия (английскими буквами)</label>
-                <input class="form-control" type="text" id="name" placeholder="Имя Фамилия">                
-            </div>
-            <div class="form-group">
-                <label class="text-light" for="name">Тема</label>
-                <input class="form-control" type="text" id="subject" placeholder="Тема">
-            </div>
-            <div class="form-group">
-                <label class="text-light" for="name">Сообщение</label>
+                <label id="label-email" class="text-light" for="name">Сообщение</label>
                 <textarea name="email" id="email" class="form-control"></textarea>
             </div>
             <div class="form-group">
                 <input type="submit" id="send" class="btn btn-outline-light btn-block" value="Отправить">
             </div>            
-        </div>
+        </div>       
         
     </div>
 
@@ -86,8 +68,11 @@
         tg.expand()
 
         ruBtn.addEventListener("click", ()=> {
-           document.getElementById("en-form").style.display = "none"; 
-           document.getElementById("ru-form").style.display = "block"; 
+            
+           document.getElementById("label-name").innerText = "Имя Фамили (английскими буквами)" 
+           document.getElementById("label-subject").innerText = "Тема письма" 
+           document.getElementById("label-email").innerText = "Сообщение" 
+           document.getElementById("send").value = "Отправить" 
 
            ruBtn.classList.remove("btn-outline-dark");
            ruBtn.classList.add("btn-dark");
@@ -99,9 +84,10 @@
 
         enBtn.addEventListener("click", () => {
            
-           document.getElementById("ru-form").style.display = "none"; 
-           document.getElementById("en-form").style.display = "block"; 
-         
+           document.getElementById("label-name").innerText = "Full Name" 
+           document.getElementById("label-subject").innerText = "Subject" 
+           document.getElementById("label-email").innerText = "Message"  
+           document.getElementById("send").value = "Send" 
 
            ruBtn.classList.remove("btn-dark");
            ruBtn.classList.add("btn-outline-dark");
