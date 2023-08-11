@@ -6,7 +6,13 @@ import smtplib, ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-TOKEN = '5994379087:AAHP4nVkE9CBW1lzjliu6fLPoa57dP7R3ko'
+from email.message import EmailMessage
+
+import os
+
+TOKEN = os.getenv("TOKEN")
+print(TOKEN)
+# TOKEN = '5994379087:AAHP4nVkE9CBW1lzjliu6fLPoa57dP7R3ko'
 
 bot = Bot(TOKEN)
 
@@ -53,6 +59,7 @@ async def start(message: types.Message):
     markup.row(btn2)
     btn3 = types.InlineKeyboardButton(post, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/index.html'))
     markup.row(btn3)
+  
     logo = open('./img/logo_bot.png', 'rb')
     await message.answer_photo(logo)
     await message.answer(hello)
@@ -74,10 +81,15 @@ async def web_app(message: types.Message):
 
      
 
-    SMTP_SERVER = "smtp.office365.com"
-    PORT = 587  # For starttls
-    MY_ADDRESS = "itbotkbl@outlook.com"
-    PASSWORD = "qz?}Y8YiP3LDKdX"
+    # SMTP_SERVER = "smtp.office365.com"
+    # PORT = 587  # For starttls
+    # MY_ADDRESS = "itbotkbl@outlook.com"
+
+    SMTP_SERVER = "kzbozint.kazminerals.com"
+    PORT = 587   # For starttls
+    MY_ADDRESS = os.getenv("MY_ADDRESS")
+
+    PASSWORD = os.getenv("PASSWORD")
 
     RECIVER_ADDRESS = "maxim.abylkassov@kazminerals.com"
 
@@ -86,11 +98,7 @@ async def web_app(message: types.Message):
 
     # Try to log in to server and send email
     try:
-        server = smtplib.SMTP(SMTP_SERVER,PORT)
-        server.ehlo() # Can be omitted
-        server.starttls(context=context) # Secure the connection
-        server.ehlo() # Can be omitted
-        server.login(MY_ADDRESS, PASSWORD)
+       
 
         msg = MIMEMultipart()       # create a message
 
@@ -100,14 +108,23 @@ async def web_app(message: types.Message):
 
         msg.attach(MIMEText(f'{name} \n {text_message}'))
 
-        server.send_message(msg)
+        
 
+        with smtplib.SMTP(SMTP_SERVER, 587) as server:
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+            server.ehlo()
+            server.login(MY_ADDRESS, PASSWORD, initial_response_ok=True) 
+            server.ehlo()
+            server.send_message(msg)
+            print('Email sent!')
+            server.close()
 
     except Exception as e:
         # Print any error messages to stdout
         print(e)
-    finally:
-        server.quit()
+    
 
 
 
