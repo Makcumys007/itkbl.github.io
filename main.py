@@ -2,13 +2,12 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types.web_app_info import WebAppInfo
 import json 
 import smtplib, ssl
-
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-
 from email.message import EmailMessage
-
 import os
+from cryptography import x509
+from cryptography.hazmat.backends import default_backend
 
 TOKEN = os.getenv("TOKEN")
 print(TOKEN)
@@ -86,7 +85,7 @@ async def web_app(message: types.Message):
     # MY_ADDRESS = "itbotkbl@outlook.com"
 
     SMTP_SERVER = "kzbozint.kazminerals.com"
-    PORT = 587   # For starttls
+    PORT = 25   # For starttls
     MY_ADDRESS = os.getenv("MY_ADDRESS")
 
     PASSWORD = os.getenv("PASSWORD")
@@ -94,7 +93,10 @@ async def web_app(message: types.Message):
     RECIVER_ADDRESS = "maxim.abylkassov@kazminerals.com"
 
      # Create a secure SSL context
+
     context = ssl.create_default_context()
+    print(ssl.OPENSSL_VERSION_NUMBER)
+    
 
     # Try to log in to server and send email
     try:
@@ -110,9 +112,9 @@ async def web_app(message: types.Message):
 
         
 
-        with smtplib.SMTP(SMTP_SERVER, 587) as server:
+        with smtplib.SMTP_SSL(SMTP_SERVER, 587) as server:
             server.ehlo()
-            server.starttls()
+            server.starttls(context=context)
             server.ehlo()
             server.ehlo()
             server.login(MY_ADDRESS, PASSWORD, initial_response_ok=True) 
