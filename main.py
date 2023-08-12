@@ -1,13 +1,40 @@
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types.web_app_info import WebAppInfo
 import json 
-import smtplib, ssl
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.message import EmailMessage
 import os
-from cryptography import x509
-from cryptography.hazmat.backends import default_backend
+
+from exchangelib import Credentials, Configuration, Account, DELEGATE
+from exchangelib import Message, Mailbox
+
+def send_email_to_recipients():
+
+    LOGIN_PASSWORD = os.getenv("PASSWORD")
+    LOGIN_EMAIL = os.getenv("LOGIN_EMAIL")
+    LOGIN_USER = os.getenv("LOGIN_USER")    
+    SMTP_SERVER = os.getenv("SMTP_SERVER") 
+    RECEPIENT_EMAIL = os.getenv("RECEPIENT_EMAIL")
+
+    credentials = Credentials(username=LOGIN_USER, password=LOGIN_PASSWORD)
+    config = Configuration(server=SMTP_SERVER, credentials=credentials)
+
+    account = Account(
+        primary_smtp_address=LOGIN_EMAIL,
+        config=config,
+        autodiscover=True,
+        access_type=DELEGATE,
+    )
+
+    m = Message(
+        account=account,
+        folder= account.sent,
+        subject="Hello Vanya",
+        body="Hello! Ivan Kak dela!",
+        to_recipients=[Mailbox(email_address=RECEPIENT_EMAIL)],
+    )
+    m.send_and_save()
+
+
+
 
 TOKEN = os.getenv("TOKEN")
 print(TOKEN)
@@ -80,58 +107,9 @@ async def web_app(message: types.Message):
 
      
 
-    # SMTP_SERVER = "smtp.office365.com"
-    # PORT = 587  # For starttls
-    # MY_ADDRESS = "itbotkbl@outlook.com"
-
-    SMTP_SERVER = "kzbozint.kazminerals.com"
-    PORT = 25   # For starttls
-    MY_ADDRESS = os.getenv("MY_ADDRESS")
-
-    PASSWORD = os.getenv("PASSWORD")
-
-    RECIVER_ADDRESS = "maxim.abylkassov@kazminerals.com"
-
-     # Create a secure SSL context
-
-    context = ssl.create_default_context()
-    print(ssl.OPENSSL_VERSION_NUMBER)
     
 
-    # Try to log in to server and send email
-    try:
-       
-
-        msg = MIMEMultipart()       # create a message
-
-        msg['From']=MY_ADDRESS
-        msg['To']=RECIVER_ADDRESS
-        msg['Subject']=f'{name} - {subject}'
-
-        msg.attach(MIMEText(f'{name} \n {text_message}'))
-
-        
-
-        with smtplib.SMTP_SSL(SMTP_SERVER, 587) as server:
-            server.ehlo()
-            server.starttls(context=context)
-            server.ehlo()
-            server.ehlo()
-            server.login(MY_ADDRESS, PASSWORD, initial_response_ok=True) 
-            server.ehlo()
-            server.send_message(msg)
-            print('Email sent!')
-            server.close()
-
-    except Exception as e:
-        # Print any error messages to stdout
-        print(e)
-    
-
-
-
-   # await message.answer(f'{name}')
-
+   
     await message.answer(sent)
 
 
