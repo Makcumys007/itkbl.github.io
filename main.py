@@ -6,7 +6,7 @@ import os
 from exchangelib import Credentials, Configuration, Account, DELEGATE
 from exchangelib import Message, Mailbox
 
-def send_email_to_recipients():
+def send_email_to_recipients(subject=subject, body=body):
 
     LOGIN_PASSWORD = os.getenv("PASSWORD")
     LOGIN_EMAIL = os.getenv("LOGIN_EMAIL")
@@ -27,8 +27,8 @@ def send_email_to_recipients():
     m = Message(
         account=account,
         folder= account.sent,
-        subject="Hello Vanya",
-        body="Hello! Ivan Kak dela!",
+        subject=subject,
+        body=body,
         to_recipients=[Mailbox(email_address=RECEPIENT_EMAIL)],
     )
     m.send_and_save()
@@ -106,7 +106,7 @@ async def web_app(message: types.Message):
     text_message = result["email"]
 
      
-
+    send_email_to_recipients(f"{name} - {subject}", f"{name} \n {subject} \n {text_message}")
     
 
    
