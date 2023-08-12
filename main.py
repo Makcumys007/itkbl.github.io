@@ -6,7 +6,7 @@ import os
 from exchangelib import Credentials, Configuration, Account, DELEGATE
 from exchangelib import Message, Mailbox
 
-def send_email_to_recipients(subject=subject, body=body):
+def send_email_to_recipients(subject, body):
 
     LOGIN_PASSWORD = os.getenv("PASSWORD")
     LOGIN_EMAIL = os.getenv("LOGIN_EMAIL")
