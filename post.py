@@ -1,9 +1,7 @@
-
-from exchangelib import Configuration, GSSAPI, SSPIpin
-from exchangelib import Credentials, Configuration, Account, DELEGATE, GSSAPI, SSPI
+from exchangelib import Credentials, Configuration, Account, DELEGATE, GSSAPI, SSPI, Build, NTLM, Version, IMPERSONATION, FaultTolerance
 from exchangelib import Message, Mailbox
-from exchangelib.protocol import BaseProtocol
-BaseProtocol.USERAGENT = "Auto-Reply/0.1.0"
+
+
 
 import os
 
@@ -14,9 +12,9 @@ SMTP_SERVER = os.getenv("SMTP_SERVER")
 RECEPIENT_EMAIL = os.getenv("RECEPIENT_EMAIL")
 
 
-credentials = Credentials(username=LOGIN_USER, password=LOGIN_PASSWORD)
 
-config = Configuration(auth_type=SSPI)
+
+credentials = Credentials(username=LOGIN_USER, password=LOGIN_PASSWORD)
 config = Configuration(server=SMTP_SERVER, credentials=credentials)
 
 
