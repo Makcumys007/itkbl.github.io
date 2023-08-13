@@ -5,7 +5,7 @@ from exchangelib import Message, Mailbox
 
 import os
 
-LOGIN_PASSWORD = os.getenv("PASSWORD")
+LOGIN_PASSWORD = os.getenv("LOGIN_PASSWORD")
 LOGIN_EMAIL = os.getenv("LOGIN_EMAIL")
 LOGIN_USER = os.getenv("LOGIN_USER")    
 SMTP_SERVER = os.getenv("SMTP_SERVER") 

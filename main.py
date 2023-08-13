@@ -8,7 +8,7 @@ from exchangelib import Message, Mailbox
 
 def send_email_to_recipients(subject, body):
 
-    LOGIN_PASSWORD = os.getenv("PASSWORD")
+    LOGIN_PASSWORD = os.getenv("LOGIN_PASSWORD")
     LOGIN_EMAIL = os.getenv("LOGIN_EMAIL")
     LOGIN_USER = os.getenv("LOGIN_USER")    
     SMTP_SERVER = os.getenv("SMTP_SERVER") 
@@ -38,7 +38,6 @@ def send_email_to_recipients(subject, body):
 
 TOKEN = os.getenv("TOKEN")
 print(TOKEN)
-# TOKEN = '5994379087:AAHP4nVkE9CBW1lzjliu6fLPoa57dP7R3ko'
 
 bot = Bot(TOKEN)
 
