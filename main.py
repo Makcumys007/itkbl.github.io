@@ -5,10 +5,10 @@ import os
 
 from exchangelib import Credentials, Configuration, Account, DELEGATE
 from exchangelib import Message, Mailbox
-#from dotenv import load_dotenv 
+from dotenv import load_dotenv 
 import os
 
-#load_dotenv()
+load_dotenv()
 
 
 def send_email_to_recipients(subject, body):
