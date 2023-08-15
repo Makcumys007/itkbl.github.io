@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-current_directory = os.getcwd()
+
 
 def send_email_to_recipients(subject, body):
 
@@ -42,6 +42,7 @@ def send_email_to_recipients(subject, body):
 
 
 TOKEN = os.getenv("TOKEN")
+IMG_FOLDER_PATH = os.getenv("IMG_FOLDER_PATH")
 print(TOKEN)
 
 bot = Bot(TOKEN)
@@ -89,8 +90,10 @@ async def start(message: types.Message):
     markup.row(btn2)
     btn3 = types.InlineKeyboardButton(post, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/index.html'))
     markup.row(btn3)
-  
-    logo = open('./img/logo_bot.png', 'rb')
+    
+    
+
+    logo = open(f'{IMG_FOLDER_PATH}logo_bot.png', 'rb')
     await message.answer_photo(logo)
     await message.answer(hello)
    # time.sleep(5)
