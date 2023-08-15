@@ -22,6 +22,7 @@
             
             <div class="ml-auto">
                 <input type="submit" id="ru" class="btn btn-dark" value="Ru">
+                <input type="submit" id="kz" class="btn btn-outline-dark" value="Kz">
                 <input type="submit" id="en" class="btn btn-outline-dark" value="En">
             </div>
         </div>
@@ -67,12 +68,14 @@
 
         let ruBtn = document.getElementById("ru");
         let enBtn = document.getElementById("en");
+        let kzBtn = document.getElementById("kz");
         let sendBtn = document.getElementById("send");
 
         let error = document.getElementById("error");
 
         let isRu = true
         let isEn = false
+        let isKz = false
 
         // Open full screen mode on smartphone
         tg.expand()
@@ -82,6 +85,7 @@
            error.innerText = ''
 
            isEn = false
+           isKz = false
            isRu = true 
             
            document.getElementById("label-name").innerText = "Имя пользователя " 
@@ -95,6 +99,32 @@
            ruBtn.classList.add("btn-dark");
            enBtn.classList.remove("btn-dark");
            enBtn.classList.add("btn-outline-dark");
+           kzBtn.classList.remove("btn-dark");
+           kzBtn.classList.add("btn-outline-dark");
+
+        });
+
+
+        kzBtn.addEventListener("click", ()=> {
+
+        error.innerText = ''
+
+        isEn = false
+        isRu = false 
+        isKz = true
+        
+        document.getElementById("label-name").innerText = "Пайдаланушының аты " 
+        document.getElementById("label-subject").innerText = "Қысқа сипаттама " 
+        document.getElementById("label-email").innerText = "Хабарлама " 
+        document.getElementById("fields").innerText = "Ескерту: белгіленген ( * ) жолдарды толтыру міндетті."
+        document.getElementById("send").value = "Жіберу" 
+
+        kzBtn.classList.remove("btn-outline-dark");
+        kzBtn.classList.add("btn-dark");    
+        ruBtn.classList.remove("btn-dark");
+        ruBtn.classList.add("btn-outline-dark");
+        enBtn.classList.remove("btn-dark");
+        enBtn.classList.add("btn-outline-dark");
 
         });
 
@@ -104,7 +134,8 @@
            error.innerText = ''
 
            isEn = true
-           isRu = false 
+           isRu = false            
+           isKz = false
            
            document.getElementById("label-name").innerText = "Login " 
            document.getElementById("label-subject").innerText = "Short description " 
@@ -117,6 +148,8 @@
            ruBtn.classList.add("btn-outline-dark");
            enBtn.classList.remove("btn-outline-dark");
            enBtn.classList.add("btn-dark");
+           kzBtn.classList.remove("btn-dark");
+           kzBtn.classList.add("btn-outline-dark");
         });
 
         sendBtn.addEventListener("click", () => {
@@ -131,6 +164,9 @@
             } else if (name.length < 5 && isEn) {
                 error.innerText = 'You entered your first and last name incorrectly';
                 return;
+            } else if (name.length < 5 && isKz) {
+                error.innerText = 'You entered your first and last name incorrectly';
+                return;
             }
 
 
@@ -140,12 +176,18 @@
             } else if (subject.length < 3 && isEn) {
                 error.innerText = 'Email subject too short';
                 return;
+            } else if (subject.length < 3 && isKz) {
+                error.innerText = 'Email subject too short';
+                return;
             }
 
             if (email.length < 5 && isRu) {
                 error.innerText = 'Слишком короткое содержание письма';
                 return;
             } else if (email.length < 5 && isEn) {
+                error.innerText = 'The content of the letter is too short';
+                return;
+            } else if (email.length < 5 && isKz) {
                 error.innerText = 'The content of the letter is too short';
                 return;
             }
