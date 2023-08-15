@@ -30,16 +30,20 @@
     <div class="home">
         <div id="form" class="container">
             <div class="form-group">
-                <label id="label-name" class="text-light" for="name">Имя Фамилия (английскими буквами)</label>
-                <input class="form-control" type="text" id="name" placeholder="Enter name lastname">                
+                <label id="label-name" class="text-light" for="name">Имя пользователя </label><span  class="text-danger"> *</span>
+                <input class="form-control" type="text" id="name" placeholder="Maxim Abylkassov">                
             </div>
             <div class="form-group">
-                <label id="label-subject" class="text-light" for="name">Тема письма</label>
-                <input class="form-control" type="text" id="subject" placeholder="Enter subject">
+                <label id="label-subject" class="text-light" for="name">Краткое описание </label><span  class="text-danger"> *</span>
+                <input class="form-control" type="text" id="subject" placeholder="Outlook, Internet, Printer...">
             </div>
             <div class="form-group">
-                <label id="label-email" class="text-light" for="name">Сообщение</label>
+                <label id="label-email" class="text-light" for="name">Сообщение </label><span  class="text-danger"> *</span>
                 <textarea name="email" id="email" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label id="fields" class="text-light">Примечание: Поля отмеченные (*) обязательны к заполнению.</label>
+              
             </div>
             <div class="form-group">
                 <input type="submit" id="send" class="btn btn-outline-light btn-block" value="Отправить">
@@ -80,10 +84,12 @@
            isEn = false
            isRu = true 
             
-           document.getElementById("label-name").innerText = "Имя Фамили (английскими буквами)" 
-           document.getElementById("label-subject").innerText = "Тема письма" 
-           document.getElementById("label-email").innerText = "Сообщение" 
+           document.getElementById("label-name").innerText = "Имя пользователя " 
+           document.getElementById("label-subject").innerText = "Краткое описание " 
+           document.getElementById("label-email").innerText = "Сообщение " 
+           document.getElementById("fields").innerText = "Примечание: Поля отмеченные (*) обязательны к заполнению."
            document.getElementById("send").value = "Отправить" 
+           
 
            ruBtn.classList.remove("btn-outline-dark");
            ruBtn.classList.add("btn-dark");
@@ -100,10 +106,12 @@
            isEn = true
            isRu = false 
            
-           document.getElementById("label-name").innerText = "Full Name" 
-           document.getElementById("label-subject").innerText = "Subject" 
-           document.getElementById("label-email").innerText = "Message"  
+           document.getElementById("label-name").innerText = "Login " 
+           document.getElementById("label-subject").innerText = "Short description " 
+           document.getElementById("label-email").innerText = "Message "  
+           document.getElementById("fields").innerText = "Note: Fields marked with (*) are mandatory."
            document.getElementById("send").value = "Send" 
+           
 
            ruBtn.classList.remove("btn-dark");
            ruBtn.classList.add("btn-outline-dark");

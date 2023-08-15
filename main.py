@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-
+current_directory = os.getcwd()
 
 def send_email_to_recipients(subject, body):
 
