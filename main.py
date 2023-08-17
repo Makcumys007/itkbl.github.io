@@ -1,3 +1,4 @@
+import time
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types.web_app_info import WebAppInfo
 import json 
@@ -68,12 +69,19 @@ async def start(message: types.Message):
 
     global language
     language = message.from_user.language_code
+    print(language)
     if language == 'en':
         hello = 'Welcome to the IT KBL bot!\nWe will help you solve your problems...'
         reset = 'Reset password'
         service = 'Our services'
         call = 'Call back IT Service Desk'     
-        post = 'Email us'           
+        post = 'Email us'   
+    elif language == 'kk':
+        hello = 'IT KBL ботына қош келдіңіз!\n Біз сіздің мәселелеріңізді шешуге көмектесеміз.'   
+        reset = 'Парольды өзгерту' 
+        service = 'Біздің қызметтер'    
+        call = 'IT Service Desk\'ке қоңырау шалу' 
+        post = 'Бізге жазу'   
     else:
         hello = 'Добро пожаловать в бот IT KBL!\nМы поможем вам в решении ваших проблем... '
         reset = 'Сбросить пароль'
@@ -96,7 +104,7 @@ async def start(message: types.Message):
     logo = open(f'{IMG_FOLDER_PATH}logo_bot.png', 'rb')
     await message.answer_photo(logo)
     await message.answer(hello)
-   # time.sleep(5)
+    time.sleep(2)
     await message.answer(service, reply_markup=markup)
 
 @dp.message_handler(content_types=['web_app_data'])
@@ -104,6 +112,8 @@ async def web_app(message: types.Message):
 
     if language == 'en':
         sent = 'Your request has been received! Thank you!'
+    elif language == 'kk':
+        sent = 'Сіздің өтінішіңіз қабылданды! Рахмет!'
     else:
         sent = 'Ваше обращение получено! Спасибо!'
 
@@ -133,12 +143,14 @@ async def echo(message: types.Message):
 
 
     if language == 'en':
-        start_run = 'To get the menu, press /start'           
+        start_run = 'To get the menu, press /start'     
+    elif language == 'kk':
+        start_run = 'Мәзірді алу үшін /start түймесін басыңыз.'
     else:
         start_run = 'Для получения меню, нажмите /start'  
 
 
-    if message.text == 'Call back IT Service Desk' or message.text == 'Позвонить в IT Service Desk':
+    if message.text == 'Call back IT Service Desk' or message.text == 'Позвонить в IT Service Desk' or message.text == 'IT Service Desk\'ке қоңырау шалу':
         await message.answer(f'+77750111911')
     else:        
         await message.answer(f'{start_run}')
