@@ -83,7 +83,7 @@ async def start(message: types.Message):
         call = 'IT Service Desk\'ке қоңырау шалу' 
         post = 'Бізге жазу'   
     else:
-        hello = 'Добро пожаловать в бот IT KBL!\nМы поможем вам в решении ваших проблем... '
+        hello = 'Добро пожаловать в бот IT KBL!\nМы рады вам помочь... '
         reset = 'Сбросить пароль'
         service = 'Наши сервисы'
         call = 'Позвонить в IT Service Desk'
