@@ -75,7 +75,7 @@ async def start(message: types.Message):
         reset = 'Reset password'
         service = 'Our services'
         call = 'Call IT Service Desk'     
-        post = 'Email us'   
+        post = 'Write us'   
     elif language == 'kk':
         hello = 'IT KBL ботына қош келдіңіз!\n Біз сізге көмектесуге қуаныштымыз...'   
         reset = 'Парольды өзгерту' 
