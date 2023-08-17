@@ -71,7 +71,7 @@ async def start(message: types.Message):
     language = message.from_user.language_code
     print(language)
     if language == 'en':
-        hello = 'Welcome to the IT KBL bot!\nWe will help you solve your problems...'
+        hello = 'Welcome to IT KBL bot!\nWe are glad to help you...'
         reset = 'Reset password'
         service = 'Our services'
         call = 'Call back IT Service Desk'     
@@ -145,7 +145,7 @@ async def echo(message: types.Message):
     if language == 'en':
         start_run = 'To get the menu, press /start'     
     elif language == 'kk':
-        start_run = 'Мәзірді алу үшін /start түймесін басыңыз.'
+        start_run = 'Мәзірге өту үшін /start батырмасын басыңыз.'
     else:
         start_run = 'Для получения меню, нажмите /start'  
 
