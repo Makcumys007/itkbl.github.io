@@ -98,6 +98,9 @@ async def start(message: types.Message):
     markup.row(btn2)
     btn3 = types.InlineKeyboardButton(post, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/index.html'))
     markup.row(btn3)
+
+    btn4 = types.InlineKeyboardButton(post, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/tickets.html'))
+    markup.row(btn4)
     
     
 

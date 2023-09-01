@@ -9,7 +9,7 @@
     crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 
-  <title>Call back</title>
+  <title>Tickets</title>
 </head>
 
 <body class="bg-dark">
@@ -28,18 +28,18 @@
     </nav>
 
     <div class="home">
-        <div class="container">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h4 id="contact-title" class="card-title">Позвонить нам</h4>
-                    <a href="tel:+77750111911" >+77750111911</a><br>
-                    <a href="tel:11911" class="card-text">11911</a>
-                    <p class="card-text">
-                        <small class="text-muted">IT KBL </small>
-                    </p>
-                </div>
-            </div>
+      <div id="form" class="container">
+        <div class="form-group">
+            <label id="label-employeId" class="text-light" for="employeId">Табельный номер </label><span  class="text-danger"> *</span>
+            <input class="form-control" type="text" id="employeId" placeholder="7833">                
         </div>
+        
+        <div class="form-group">
+            <input type="submit" id="find" class="btn btn-outline-light btn-block" value="Найти">
+        </div>  
+        
+        <div id="error" class="text-danger"></div>
+    </div> 
     </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -56,7 +56,8 @@
 
         let ruBtn = document.getElementById("ru");
         let enBtn = document.getElementById("en");
-        let sendBtn = document.getElementById("send");
+        let employeId = document.getElementById("employeId")
+        let sendBtn = document.getElementById("find");
 
         let isRu = true
         let isEn = false
@@ -93,6 +94,15 @@
            enBtn.classList.remove("btn-outline-dark");
            enBtn.classList.add("btn-dark");
         });
+
+        // Sending data to telegram bot
+        let data = {
+              employeId: employeId
+            }
+
+            tg.sendData(JSON.stringify(data));
+
+            tg.close();
 
        
 
