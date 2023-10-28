@@ -150,7 +150,7 @@ async def echo(message: types.Message):
         start_run = 'Для получения меню, нажмите /start'  
 
 
-    if message.text == 'Call back IT Service Desk' or message.text == 'Позвонить в IT Service Desk' or message.text == 'IT Service Desk\'ке қоңырау шалу':
+    if message.text == 'Call IT Service Desk' or message.text == 'Позвонить в IT Service Desk' or message.text == 'IT Service Desk\'ке қоңырау шалу':
         await message.answer(f'+77750111911')
     else:        
         await message.answer(f'{start_run}')
