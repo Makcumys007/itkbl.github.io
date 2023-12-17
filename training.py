@@ -26,7 +26,7 @@ dp = Dispatcher(bot)
 async def start(message: types.Message):
     await message.reply("Привет!")
     markup = types.ReplyKeyboardMarkup()
-    btn1 = types.InlineKeyboardButton("Табельный номер", web_app=WebAppInfo(url='https://passwordreset.microsoftonline.com/'))
+    btn1 = types.InlineKeyboardButton("Табельный номер", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html'))
     markup.row(btn1)  
     time.sleep(2)
     await message.answer('service', reply_markup=markup)
