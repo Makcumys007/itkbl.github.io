@@ -24,17 +24,16 @@ dp = Dispatcher(bot)
 # Обработчик команды /start
 @dp.message_handler(commands=['sba003'])
 async def start(message: types.Message):
-    await message.reply("Привет!")
     markup = types.ReplyKeyboardMarkup()
     btn1 = types.InlineKeyboardButton("Табельный номер", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html'))
     markup.row(btn1)  
     time.sleep(2)
     await message.answer('service', reply_markup=markup)
 
-# Обработчик для всех остальных сообщений
-@dp.message_handler()
-async def echo(message: types.Message):
-    await message.reply(message.text)
+# # Обработчик для всех остальных сообщений
+# @dp.message_handler()
+# async def echo(message: types.Message):
+#     await message.reply(message.text)
 
 # Запуск бота
 if __name__ == '__main__':
