@@ -12,5 +12,8 @@ dnspython==2.4.2
 exchangelib==5.0.3
 frozenlist==1.4.0
 python-dotenv==1.0.0
+openpyxl==3.1.2
+
+
 
 
