@@ -9,7 +9,7 @@
     crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 
-  <title>Tickets</title>
+    <title>Табельный номер</title>
 </head>
 
 <body class="bg-dark">
@@ -64,9 +64,9 @@
         find.addEventListener("click", () => {
 
             let employeId = document.getElementById("employeId").value;
-            const url = location.search;
+            let url = location.search;
 
-            const sba = url.split("=")[1];
+            let sba = url.split("=")[1];
 
             console.log(sba);
            

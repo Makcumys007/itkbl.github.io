@@ -31,10 +31,10 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
 # Обработчик команды /start
-@dp.message_handler(commands=['sba003'])
+@dp.message_handler(commands=['SBA061'])
 async def start(message: types.Message):
     markup = types.ReplyKeyboardMarkup()
-    btn1 = types.InlineKeyboardButton("Табельный номер", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=sba003'))
+    btn1 = types.InlineKeyboardButton("Табельный номер", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA061'))
     markup.row(btn1)  
     time.sleep(2)
     await message.answer('service', reply_markup=markup)
@@ -49,12 +49,16 @@ async def start(message: types.Message):
 async def web_app(message: types.Message):
     result = json.loads(message.web_app_data.data) 
     employeId = result["employeId"]
+    sba = result["sba"]
+    print(sba)
     if employeId.isdigit():
+         employeId = int(employeId) 
          for emp in employees:
-            if emp.employId == 11797:
+            if emp.employId == employeId:
                 print(emp)
-                print(emp.get_SBA('SBA061'))  
+              #  print(emp.get_SBA(sba))  
     await message.reply(employeId)
+    await message.reply(sba)
 
 
 # Запуск бота
