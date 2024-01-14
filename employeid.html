@@ -49,6 +49,9 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
     <script>
+
+        
+
         let tg = window.Telegram.WebApp;
         let find = document.getElementById("find");
 
@@ -60,11 +63,17 @@
 
         find.addEventListener("click", () => {
 
-           let employeId = document.getElementById("employeId").value;
+            let employeId = document.getElementById("employeId").value;
+            const url = location.search;
+
+            const sba = url.split("=")[1];
+
+            console.log(id);
            
            // Sending data to telegram bot
            let data = {
-            employeId: employeId,
+               employeId: employeId,
+               sba: sba,
            }
 
            tg.sendData(JSON.stringify(data));

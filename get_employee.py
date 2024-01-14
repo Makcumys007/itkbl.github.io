@@ -53,13 +53,9 @@ def print_table(filename):
         employee.set_SBA('SBA113', 'Персонал, имеющий смежную профессию Стропальщик ежегодно/annually', row[16], row[17])
         employee.set_SBA('SBA109', 'Персонал, имеющий смежную профессию рабочий с правом управления грузоподъемными механизмами с пола ежегодно/annually', row[18], row[19])
         employee.set_SBA('SBA054', 'Лица, допущенные к самостоятельной работе в качестве машиниста крана  ежегодно/annually', row[20], row[21])
-
         employee.set_SBA('SBA055', 'Работники, допущенные к управлению вилочным погрузчиком', row[22], row[23])
-
         employee.set_SBA('SBA137', 'ИТР, ответственный по надзору за техническим состоянием и эксплуатацией сосудов', row[24], row[25])
-
         employee.set_SBA('SBA147', 'ИТР, ответственный по надзору за безопасной эксплуатаций КС и СРД', row[26], row[27])
-
         employee.set_SBA('SBA029_1', 'ИТР Ответственные за исправное состояние и безопасное действие сосудов', row[28], row[29])
         employee.set_SBA('SBA146', 'ИТР Ответственный за исправное состояние КС и СРД', row[30], row[31])
         employee.set_SBA('SBA116_1', 'Ответственные за исп. сост. и безопасную эксплуатацию котлов', row[32], row[33])
@@ -75,7 +71,17 @@ def print_table(filename):
         employee.set_SBA('SBA077', 'ПТМ один раз в три года', row[52], row[53])
         employees.append(employee)
 
+    return employees
 
+             
+
+
+
+
+
+if __name__ == "__main__":
+    filename = "//10.34.3.20/distr$/Telegram.xlsx"
+    employees = print_table(filename)
     for emp in employees:
         if emp.employId == 11797:
             print(emp)
@@ -104,14 +110,6 @@ def print_table(filename):
             print(emp.get_SBA('SBA034')) 
             print(emp.get_SBA('SBA035'))     
             print(emp.get_SBA('SBA036')) 
-            print(emp.get_SBA('SBA077'))            
-
-
-
-
-
-if __name__ == "__main__":
-    filename = "//10.34.3.20/distr$/Telegram.xlsx"
-    print_table(filename)
+            print(emp.get_SBA('SBA077'))  
 
 
