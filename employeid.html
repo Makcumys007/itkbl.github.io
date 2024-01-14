@@ -50,9 +50,7 @@
     
     <script>
         let tg = window.Telegram.WebApp;
-
-        let employeId = document.getElementById("employeId")
-        let sendBtn = document.getElementById("find");
+        let find = document.getElementById("find");
 
    
         // Open full screen mode on smartphone
@@ -60,9 +58,10 @@
 
         
 
-        sendBtn.addEventListener("click", () => {
+        find.addEventListener("click", () => {
+
+           let employeId = document.getElementById("employeId").value;
            
-           let employeId = employeId.value;
            // Sending data to telegram bot
            let data = {
             employeId: employeId,

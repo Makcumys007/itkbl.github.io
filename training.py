@@ -10,8 +10,11 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types.web_app_info import WebAppInfo
 import json 
 import os
+# Путь к файлу env.env
+dotenv_path = "env.env"
 
-load_dotenv()
+# Загружаем переменные окружения
+load_dotenv(dotenv_path)
 TOKEN = os.getenv("TOKEN2")
 
 # Установка уровня логирования
@@ -34,6 +37,14 @@ async def start(message: types.Message):
 # @dp.message_handler()
 # async def echo(message: types.Message):
 #     await message.reply(message.text)
+
+
+@dp.message_handler(content_types=['web_app_data'])
+async def web_app(message: types.Message):
+    result = json.loads(message.web_app_data.data) 
+    employeId = result["employeId"]
+    await message.reply(employeId)
+
 
 # Запуск бота
 if __name__ == '__main__':
