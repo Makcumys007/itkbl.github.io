@@ -12,7 +12,7 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types.web_app_info import WebAppInfo
 import json 
 import os
-import get_employee
+from get_employee import print_table, trim_date
 # Путь к файлу env.env
 dotenv_path = "env.env"
 
@@ -21,7 +21,7 @@ load_dotenv(dotenv_path)
 TOKEN = os.getenv("TOKEN2")
 EXCEL_FILE = os.getenv("EXCEL_FILE")
 
-employees = get_employee.print_table(EXCEL_FILE)
+employees = print_table(EXCEL_FILE)
 
 # Установка уровня логирования
 logging.basicConfig(level=logging.INFO)
@@ -31,11 +31,13 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
 # Обработчик команды /start
-@dp.message_handler(commands=['SBA061'])
+@dp.message_handler(commands=['sba'])
 async def start(message: types.Message):
     markup = types.ReplyKeyboardMarkup()
-    btn1 = types.InlineKeyboardButton("Табельный номер", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA061'))
+    btn1 = types.InlineKeyboardButton("Ответственный за изоляцию", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA061'))
     markup.row(btn1)  
+    btn2 = types.InlineKeyboardButton("Управление подрядными организациями", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA130'))
+    markup.row(btn2) 
     time.sleep(2)
     await message.answer('service', reply_markup=markup)
 
@@ -54,11 +56,9 @@ async def web_app(message: types.Message):
     if employeId.isdigit():
          employeId = int(employeId) 
          for emp in employees:
-            if emp.employId == employeId:
-                print(emp)
-              #  print(emp.get_SBA(sba))  
-    await message.reply(employeId)
-    await message.reply(sba)
+            if emp.employId == employeId:                
+                await message.reply(emp)
+                await message.reply(emp.get_sba(sba))
 
 
 # Запуск бота
