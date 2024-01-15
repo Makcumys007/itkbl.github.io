@@ -91,7 +91,9 @@ def print_table(filename):
 
 
 if __name__ == "__main__":
-    filename = "//10.34.3.20/distr$/Telegram.xlsx"
+   # filename = "//10.34.3.20/distr$/Telegram.xlsx"
+    
+    filename = "//10.34.3.176/T&D$/04 - HSE Training - Обучение ОТиТБ/04-20 Reports/Отчеты по внутренним курсам/Telegram.xlsx"
     employees = print_table(filename)
     for emp in employees:
         if emp.employId == 395:

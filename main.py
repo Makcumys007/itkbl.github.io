@@ -1,168 +1,140 @@
+from errno import EMLINK
+from telnetlib import PRAGMA_HEARTBEAT
+from dotenv import load_dotenv 
+import os
+import logging
+from aiogram import Bot, Dispatcher, types
+from aiogram.types import ParseMode
+from aiogram.utils import executor
+from aiogram.dispatcher.filters import Command
 import time
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types.web_app_info import WebAppInfo
 import json 
 import os
+from get_employee import print_table, trim_date
+# Путь к файлу env.env
+dotenv_path = "env.env"
 
-from exchangelib import Credentials, Configuration, Account, DELEGATE
-from exchangelib import Message, Mailbox
-from dotenv import load_dotenv 
-import os
+# Загружаем переменные окружения
+load_dotenv(dotenv_path)
+TOKEN = os.getenv("TOKEN2")
+EXCEL_FILE = os.getenv("EXCEL_FILE")
 
-load_dotenv()
+employees = print_table(EXCEL_FILE)
 
+# Установка уровня логирования
+logging.basicConfig(level=logging.INFO)
 
-def send_email_to_recipients(subject, body):
-
-    LOGIN_PASSWORD = os.getenv("LOGIN_PASSWORD")
-    LOGIN_EMAIL = os.getenv("LOGIN_EMAIL")
-    LOGIN_USER = os.getenv("LOGIN_USER")    
-    SMTP_SERVER = os.getenv("SMTP_SERVER") 
-    RECEPIENT_EMAIL = os.getenv("RECEPIENT_EMAIL")
-
-    credentials = Credentials(username=LOGIN_USER, password=LOGIN_PASSWORD)
-    config = Configuration(server=SMTP_SERVER, credentials=credentials)
-
-    account = Account(
-        primary_smtp_address=LOGIN_EMAIL,
-        config=config,
-        autodiscover=True,
-        access_type=DELEGATE,
-    )
-
-    m = Message(
-        account=account,
-        folder= account.sent,
-        subject=subject,
-        body=body,
-        to_recipients=[Mailbox(email_address=RECEPIENT_EMAIL)],
-    )
-    m.send_and_save()
-
-
-
-
-TOKEN = os.getenv("TOKEN")
-IMG_FOLDER_PATH = os.getenv("IMG_FOLDER_PATH")
-print(TOKEN)
-
-bot = Bot(TOKEN)
-
+# Инициализация бота и диспетчера
+bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
-language = None
-
-
-hello = ''
-reset = ''
-service = ''
-call = ''
-post = ''
-name =''
-subject = ''
-sent = ''
-start_run = ''
-
-@dp.message_handler(commands=['start','run'])
+# Обработчик команды /start
+@dp.message_handler(commands=['sba'])
 async def start(message: types.Message):
-
-
-    global language
-    language = message.from_user.language_code
-    print(language)
-    if language == 'en':
-        hello = 'Welcome to IT KBL bot!\nWe are glad to help you...'
-        reset = 'Reset password'
-        service = 'Our services'
-        call = 'Call IT Service Desk'     
-        post = 'Write us'   
-    elif language == 'kk':
-        hello = 'IT KBL ботына қош келдіңіз!\n Біз сізге көмектесуге қуаныштымыз...'   
-        reset = 'Парольды өзгерту' 
-        service = 'Біздің қызметтер'    
-        call = 'IT Service Desk\'ке қоңырау шалу' 
-        post = 'Бізге жазу'   
-    else:
-        hello = 'Добро пожаловать в бот IT KBL!\nМы рады вам помочь... '
-        reset = 'Сбросить пароль'
-        service = 'Наши сервисы'
-        call = 'Позвонить в IT Service Desk'
-        post = 'Написать нам'
-
-   # markup = types.InlineKeyboardMarkup()
     markup = types.ReplyKeyboardMarkup()
-    btn1 = types.InlineKeyboardButton(reset, web_app=WebAppInfo(url='https://passwordreset.microsoftonline.com/'))
-    markup.row(btn1)    
-    btn2 = types.InlineKeyboardButton(call, callback_data='call')
-  #  btn2 = types.InlineKeyboardButton(call, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/phone.html'))
-    markup.row(btn2)
-    btn3 = types.InlineKeyboardButton(post, web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/index.html'))
-    markup.row(btn3)
+    btn1 = types.InlineKeyboardButton("Ответственный за изоляцию", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA061'))
+    markup.row(btn1)  
+    btn2 = types.InlineKeyboardButton("Управление подрядными организациями", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA130'))
+    markup.row(btn2) 
+    btn3 = types.InlineKeyboardButton("Контроль за состоянием лесов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA143'))
+    markup.row(btn3) 
+    btn4 = types.InlineKeyboardButton("Ответственные лица по надзору за безопасной эксплуатацией грузоподъемных кранов, подъемников, съемных грузозахватных приспособлений и тары (Каждые 3 года)", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA106'))
+    markup.row(btn4) 
+    btn5 = types.InlineKeyboardButton("Ответственные лица за безопасное производство работ кранами по перемещению грузов (ежегодно)", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA107'))
+    markup.row(btn5) 
+    btn6 = types.InlineKeyboardButton("Ответственные лица за содержание грузоподъемных кранов, крановых путей и подъемников в исправном состоянии (Каждые 3 года)", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA108'))
+    markup.row(btn6)               
+    btn7 = types.InlineKeyboardButton("Работники, допущенные к управлению самоходным телескопическим подъемником и автогидроподъемником ежегодно", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA053'))
+    markup.row(btn7)               
+    btn8 = types.InlineKeyboardButton("Персонал, имеющий смежную профессию Стропальщик ежегодно", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA113'))
+    markup.row(btn8)               
+    btn9 = types.InlineKeyboardButton("Персонал, имеющий смежную профессию рабочий с правом управления грузоподъемными механизмами с пола ежегодно", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA109'))
+    markup.row(btn9)               
+    btn10 = types.InlineKeyboardButton("Лица, допущенные к самостоятельной работе в качестве машиниста крана  ежегодно", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA054'))
+    markup.row(btn10)               
+    btn11 = types.InlineKeyboardButton("Работники, допущенные к управлению вилочным погрузчиком", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA055'))
+    markup.row(btn11)               
+    btn12 = types.InlineKeyboardButton("ИТР, ответственный по надзору за техническим состоянием и эксплуатацией сосудов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA137'))
+    markup.row(btn12)               
+    btn13 = types.InlineKeyboardButton("ИТР, ответственный по надзору за безопасной эксплуатаций КС и СРД", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA147'))
+    markup.row(btn13)               
+    btn14 = types.InlineKeyboardButton("ИТР Ответственные за исправное состояние и безопасное действие сосудов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA029_1'))
+    markup.row(btn14)               
+    btn15 = types.InlineKeyboardButton("ИТР Ответственный за исправное состояние КС и СРД", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA146'))
+    markup.row(btn15)               
+    btn16 = types.InlineKeyboardButton("Ответственные за исп. сост. и безопасную эксплуатацию котлов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA116_1'))
+    markup.row(btn16)               
+    btn17 = types.InlineKeyboardButton("Ответственные за исп. сост. и безопасную экспл-ю трубопроводов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA029'))
+    markup.row(btn17)               
+    btn18 = types.InlineKeyboardButton("Лица, из числа обслуж.персонала с правом обслуживания сосудов и трубопроводов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA045'))
+    markup.row(btn18)               
+    btn19 = types.InlineKeyboardButton("Лица, допущенные к самостоятельному обслуж. КУ", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA114'))
+    markup.row(btn19)               
+    btn20 = types.InlineKeyboardButton("Лица по обслуживанию котлов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA116'))
+    markup.row(btn20)               
+    btn21 = types.InlineKeyboardButton("ПромБез для работников", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA023'))
+    markup.row(btn21)               
+    btn22 = types.InlineKeyboardButton("ПромБез для ИТР", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA024'))
+    markup.row(btn22)               
+    btn23 = types.InlineKeyboardButton("БиОТ для ИТР", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA034'))
+    markup.row(btn23)               
+    btn24 = types.InlineKeyboardButton("БиОТ для рабочих", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA035'))
+    markup.row(btn24)               
+    btn25 = types.InlineKeyboardButton("ПТМ ежегодно", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA036'))
+    markup.row(btn25)               
+    btn26 = types.InlineKeyboardButton("ПТМ один раз в три года", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA077'))
+    markup.row(btn26)  
+    btn27 = types.InlineKeyboardButton("Выявление опасных факторов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA003'))
+    markup.row(btn27) 
     
+    btn28 = types.InlineKeyboardButton("Первая помощь", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA001'))
+    markup.row(btn28) 
+    btn29 = types.InlineKeyboardButton("Наряд-допуск", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA033'))
+    markup.row(btn29) 
     
 
-    logo = open(f'{IMG_FOLDER_PATH}logo_bot.png', 'rb')
-    await message.answer_photo(logo)
-    await message.answer(hello)
+    btn30 = types.InlineKeyboardButton("Анализ безопасности работ", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA007'))
+    markup.row(btn30) 
+    btn31 = types.InlineKeyboardButton("ICAM факторов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA138'))
+    markup.row(btn31) 
+    btn32 = types.InlineKeyboardButton("Safety Leadership", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA022'))
+    markup.row(btn32)     
+    btn33 = types.InlineKeyboardButton("Владелец личного замка", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA060'))
+    markup.row(btn33)     
+    btn34 = types.InlineKeyboardButton("Работы на высоте", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA009'))
+    markup.row(btn34) 
+
+
+
+
+
+
     time.sleep(2)
-    await message.answer(service, reply_markup=markup)
+    await message.answer('Ждите...', reply_markup=markup)
+
+# # Обработчик для всех остальных сообщений
+# @dp.message_handler()
+# async def echo(message: types.Message):
+#     await message.reply(message.text)
+
 
 @dp.message_handler(content_types=['web_app_data'])
 async def web_app(message: types.Message):
-
-    if language == 'en':
-        sent = 'Your request has been received! Thank you!'
-    elif language == 'kk':
-        sent = 'Сіздің өтінішіңіз қабылданды! Рахмет!'
-    else:
-        sent = 'Ваше обращение получено! Спасибо!'
-
     result = json.loads(message.web_app_data.data) 
-    name = result["name"]
-    subject = result["subject"]
-    text_message = result["email"]
-
-     
-    send_email_to_recipients(f"{name} - {subject}", f"{name} \n {subject} \n {text_message}")
-    
-
-   
-    await message.answer(sent)
-
+    employeId = result["employeId"]
+    sba = result["sba"]
+    print(sba)
+    if employeId.isdigit():
+         employeId = int(employeId) 
+         for emp in employees:
+            if emp.employId == employeId:                
+                await message.reply(emp)
+                await message.reply(emp.get_sba(sba))
 
 
-
-@dp.callback_query_handler()
-async def callback(call):
-    if call.data == 'call':
-        await call.message.answer(f'+77750111911')
-    
-
-@dp.message_handler()
-async def echo(message: types.Message):
-
-
-    if language == 'en':
-        start_run = 'To get the menu, press /start'     
-    elif language == 'kk':
-        start_run = 'Мәзірге өту үшін /start батырмасын басыңыз.'
-    else:
-        start_run = 'Для получения меню, нажмите /start'  
-
-
-    if message.text == 'Call IT Service Desk' or message.text == 'Позвонить в IT Service Desk' or message.text == 'IT Service Desk\'ке қоңырау шалу':
-        await message.answer(f'+77750111911')
-    else:        
-        await message.answer(f'{start_run}')
-
-  
-    
-
-
-
-
-
-
-# Работает вечно
-executor.start_polling(dp)
-
+# Запуск бота
+if __name__ == '__main__':
+    from aiogram import executor
+    executor.start_polling(dp, skip_updates=True)
