@@ -1,5 +1,6 @@
 import openpyxl
 import datetime
+import os
 
 class Employee:
     dict_SBA = {}
@@ -93,13 +94,14 @@ def print_table(filename):
 if __name__ == "__main__":
    # filename = "//10.34.3.20/distr$/Telegram.xlsx"
     
-    filename = "//10.34.3.176/T&D$/04 - HSE Training - Обучение ОТиТБ/04-20 Reports/Отчеты по внутренним курсам/Telegram.xlsx"
-    employees = print_table(filename)
-    for emp in employees:
-        if emp.employId == 395:
-            print(emp) 
-            print(emp.get_sba('SBA061'))
-            print(emp.get_sba('SBA130'))
-           # print(f"Ответственный за изоляцию: Дата посл.прохождения {trim_date(emp.dates[0])}, Дата след.прохождения {trim_date(emp.dates[1])}")
+    filename = "//10.34.32.176/T&D$/04 - HSE Training - Обучение ОТиТБ/04-20 Reports/Отчеты по внутренним курсам/Telegram.xlsx"
+    if os.path.exists(filename) and os.path.isfile(filename):        
+        employees = print_table(filename)
+        for emp in employees:
+            if emp.employId == 395:
+                print(emp) 
+                print(emp.get_sba('SBA061'))
+                print(emp.get_sba('SBA130'))
+  
 
 

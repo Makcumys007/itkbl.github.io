@@ -30,7 +30,35 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
-# Обработчик команды /start
+
+@dp.message_handler(commands=['start'])
+async def start(message: types.Message):
+    markup = types.ReplyKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton("🚨🚨🚨Номера экстренных служб")
+    markup.row(btn1)   
+    btn2 = types.InlineKeyboardButton("💊👨‍⚕️👩‍⚕️Оказание доврачебной помощи")
+    markup.row(btn2) 
+    btn3 = types.InlineKeyboardButton("📑📚Организация и планирования обучения")
+    markup.row(btn3) 
+    btn4 = types.InlineKeyboardButton("📍Локация")
+    markup.row(btn4) 
+    btn5 = types.InlineKeyboardButton("👷👷‍♂️🥽🪖СИЗ")
+    markup.row(btn5) 
+    btn6 = types.InlineKeyboardButton("🔗🔗🔗Часто используемые ссылки")
+    markup.row(btn6)               
+    btn7 = types.InlineKeyboardButton("Базовые требования Безопасности")
+    markup.row(btn7)               
+    btn8 = types.InlineKeyboardButton("📚📚📚Библиотека")
+    markup.row(btn8)
+
+
+    text="Добро пожаловать в бот безопасности! Выберите раздел, который вас интересует:"
+
+
+    time.sleep(2)
+    await message.answer(text, reply_markup=markup)
+
+
 @dp.message_handler(commands=['sba'])
 async def start(message: types.Message):
     markup = types.ReplyKeyboardMarkup()
@@ -114,10 +142,7 @@ async def start(message: types.Message):
     time.sleep(2)
     await message.answer('Ждите...', reply_markup=markup)
 
-# # Обработчик для всех остальных сообщений
-# @dp.message_handler()
-# async def echo(message: types.Message):
-#     await message.reply(message.text)
+
 
 
 @dp.message_handler(content_types=['web_app_data'])
