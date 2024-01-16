@@ -30,25 +30,34 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
+main_menu = ["🚨🚨🚨Номера экстренных служб",
+             "💊👨‍⚕️👩‍⚕️Оказание доврачебной помощи",
+             "📑📚Организация и планирования обучения",
+             "📍Локация",
+             "👷👷‍♂️🥽🪖СИЗ",
+             "🔗🔗🔗Часто используемые ссылки",
+             "Базовые требования Безопасности",
+             "📚📚📚Библиотека"]
+
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
     markup = types.ReplyKeyboardMarkup()
-    btn1 = types.InlineKeyboardButton("🚨🚨🚨Номера экстренных служб")
+    btn1 = types.InlineKeyboardButton(main_menu[0])
     markup.row(btn1)   
-    btn2 = types.InlineKeyboardButton("💊👨‍⚕️👩‍⚕️Оказание доврачебной помощи")
+    btn2 = types.InlineKeyboardButton(main_menu[1])
     markup.row(btn2) 
-    btn3 = types.InlineKeyboardButton("📑📚Организация и планирования обучения")
+    btn3 = types.InlineKeyboardButton(main_menu[2])
     markup.row(btn3) 
-    btn4 = types.InlineKeyboardButton("📍Локация")
+    btn4 = types.InlineKeyboardButton(main_menu[3])
     markup.row(btn4) 
-    btn5 = types.InlineKeyboardButton("👷👷‍♂️🥽🪖СИЗ")
+    btn5 = types.InlineKeyboardButton(main_menu[4])
     markup.row(btn5) 
-    btn6 = types.InlineKeyboardButton("🔗🔗🔗Часто используемые ссылки")
+    btn6 = types.InlineKeyboardButton(main_menu[5])
     markup.row(btn6)               
-    btn7 = types.InlineKeyboardButton("Базовые требования Безопасности")
+    btn7 = types.InlineKeyboardButton(main_menu[6])
     markup.row(btn7)               
-    btn8 = types.InlineKeyboardButton("📚📚📚Библиотека")
+    btn8 = types.InlineKeyboardButton(main_menu[7])
     markup.row(btn8)
 
 
@@ -57,6 +66,18 @@ async def start(message: types.Message):
 
     time.sleep(2)
     await message.answer(text, reply_markup=markup)
+    
+
+@dp.message_handler()
+async def echo(message: types.Message):
+     request = message.text
+    
+     if request == main_menu[0]:
+        await message.answer(True)
+     
+
+
+
 
 
 @dp.message_handler(commands=['sba'])
