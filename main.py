@@ -317,6 +317,9 @@ main_menu_item1 = {"🆘🆘🆘Оперативные действия": """Л�
       При отсутствии у пострадавшего сознания и дыхания проводятся базовые реанимационные меропрятия и обеспечивается вызов экстренных служб.""",                   
                    "Go Back":""}
 
+main_menu_item2_video = {"Как обучиться по курсу ПромБез ИТР?":"./videos/IMG_6199.MP4",
+                   "Как обучится по курсу БиОТ ИТР?": "./videos/kak_biot_itr.mp4"}
+
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
@@ -348,6 +351,11 @@ async def echo(message: types.Message):
              btn = types.InlineKeyboardButton(item)
              markup.row(btn) 
         await message.answer(request, reply_markup=markup)  
+     elif request == main_menu[2]:
+        for item in main_menu_item2_video.keys():
+             btn = types.InlineKeyboardButton(item)
+             markup.row(btn) 
+        await message.answer(request, reply_markup=markup)
      
     
  
@@ -359,7 +367,13 @@ async def echo(message: types.Message):
 
 # main_menu_item1 ответы     
      if main_menu_item1.get(request): 
-        await message.answer(main_menu_item1.get(request))      
+        await message.answer(main_menu_item1.get(request))    
+
+# main_menu_item2 ответы 
+     if main_menu_item2_video.get(request): 
+        with open(main_menu_item2_video.get(request), 'rb') as video:
+            await message.answer_video(video)
+
 # Go Back to main menu 
      if request == "Go Back":   
          markup = types.ReplyKeyboardMarkup()
@@ -368,8 +382,7 @@ async def echo(message: types.Message):
             markup.row(btn)  
          await message.answer("Go Back", reply_markup=markup)
 
-
-      
+       
 
 
 
