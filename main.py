@@ -363,6 +363,13 @@ main_menu_item4_text = {"Как дойти до склада СИЗ?👷‍♀�
                          "Go Back": ""
                          }
 
+main_menu_item6_img = {"11 правил goalzero":["./images/photo_2024-01-17_12-44-19.jpg",],
+                       "🔐🔐🔐12 этапов изоляции опасных источников энергии":["./images/photo_2024-01-17_12-45-01.jpg",],
+                       "5 этапов подготовки перед началом работ в замкнутых пространствах":["./images/photo_2024-01-17_12-45-26.jpg",],
+                       "🚧🚧🚧Требования по ограждению":["./images/photo_2024-01-17_12-45-59.jpg","./images/photo_2024-01-17_12-46-20.jpg",],
+                       "🔼🔼🔼 Иррархия мер контроля":["./images/photo_2024-01-17_12-47-13.jpg",],
+                       "Go Back": ""} 
+
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
@@ -429,7 +436,42 @@ async def echo(message: types.Message):
         btn5 = types.InlineKeyboardButton("Go Back")
         markup.row(btn5)
         await message.answer(request, reply_markup=markup)
-     
+     elif request == main_menu[6]:
+        for item in main_menu_item6_img.keys():
+             btn = types.InlineKeyboardButton(item)
+             markup.row(btn) 
+        await message.answer(request, reply_markup=markup)
+     elif request == main_menu[7]:
+        markup = types.ReplyKeyboardMarkup()
+        btn1 = types.InlineKeyboardButton("📚Закон о Гражданской Защиты Республики Казахстан от 11 апреля 2014 года № 188-V 3PK.", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/Z1400000188'))
+        markup.row(btn1)  
+        btn2 = types.InlineKeyboardButton("📚Трудовой кодекс Республики Казахстан от 23 ноября 2015 года № 414-V ЗРК.", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/K1500000414'))
+        markup.row(btn2) 
+        btn3 = types.InlineKeyboardButton("📚Правила пожарной безопасности", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/V2200026867'))
+        markup.row(btn3) 
+        btn4 = types.InlineKeyboardButton("📚ПОПБ для ОПО, ведущих работы по переработке ТПИ", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/V1400010258'))
+        markup.row(btn4) 
+        btn5 = types.InlineKeyboardButton("📚ПОПБ для ОПО, ведущих горные и геологоразведочные работы", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/V1400010247'))
+        markup.row(btn5) 
+        btn6 = types.InlineKeyboardButton("📚ПОПБ при эксплуатации ГПМ", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/V1400010332'))
+        markup.row(btn6)               
+        btn7 = types.InlineKeyboardButton("📚ПОПБ при эксплуатации ОРД(СРД)", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/V1400010303'))
+        markup.row(btn7)               
+        btn8 = types.InlineKeyboardButton("📚ПОПБ при эксплуатации компрессорных станций (КУ)", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/V1400010251'))
+        markup.row(btn8)               
+        btn9 = types.InlineKeyboardButton("📚ПОПБ для хвостовых и шламовых хозяйств ОПО", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/V1400010253'))
+        markup.row(btn9)               
+        btn10 = types.InlineKeyboardButton("📚ПОПБ для опасных производственных объектов химической отрасли промышленности", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/V1400010276'))
+        markup.row(btn10)               
+        btn11 = types.InlineKeyboardButton("📚ПОПБ для ОПО в нефтехимической, нефтеперерабатывающей отраслях, нефтебаз и автозаправочных станций", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/V1400010256'))
+        markup.row(btn11)               
+        btn12 = types.InlineKeyboardButton("📚Правила подготовки, переподготовки и проверки знаний специалистов, работников в области промышленной безопасности", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/V2100023461'))
+        markup.row(btn12)         
+        btn13 = types.InlineKeyboardButton("📚Правила и сроки проведения обучения, инструктирования и проверок знаний по вопросам БиОТ", web_app=WebAppInfo(url='https://adilet.zan.kz/rus/docs/V1500012665'))
+        markup.row(btn13) 
+        btn14 = types.InlineKeyboardButton("Go Back")
+        markup.row(btn14) 
+        await message.answer(request, reply_markup=markup)
     
  
 
@@ -459,11 +501,16 @@ async def echo(message: types.Message):
 
             
 # main_menu_item4 ответы 
-
      if isinstance(main_menu_item4_text.get(request), list): 
         for i in main_menu_item4_text.get(request):
             with open(i, 'rb') as photo:
-                await message.answer_photo(photo)        
+                await message.answer_photo(photo)     
+                
+# main_menu_item6 ответы 
+     if isinstance(main_menu_item6_img.get(request), list): 
+        for i in main_menu_item6_img.get(request):
+            with open(i, 'rb') as photo:
+                await message.answer_photo(photo)    
 
 
 # Go Back to main menu 
