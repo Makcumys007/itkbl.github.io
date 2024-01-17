@@ -318,7 +318,23 @@ main_menu_item1 = {"🆘🆘🆘Оперативные действия": """Л�
                    "Go Back":""}
 
 main_menu_item2_video = {"Как обучиться по курсу ПромБез ИТР?":"./videos/IMG_6199.MP4",
-                   "Как обучится по курсу БиОТ ИТР?": "./videos/kak_biot_itr.mp4"}
+                   "Как обучится по курсу БиОТ ИТР?": "./videos/kak_biot_itr.mp4",
+                   "Обучение по курсу Управление подрядными организациями": "./videos/upravlenie_podr_org.mp4"}
+
+main_menu_item2_text = {"Обучающие ролики Emex": """сылка на ЕМЕХ https://emex.kazminerals.com/
+
+Справочные материалы https://sp.kazminerals.com/sites/it/kdb/EMEX1/Forms/AllItems.aspx 
+
+Обучающее видео https://sp.kazminerals.com/sites/it/kdb/EMEX1/Forms/AllItems.aspx?RootFolder=%2Fsites%2Fit%2Fkdb%2FEMEX1%2F%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8&FolderCTID=0x01200082EDECFB4BE58347B7994C2C179E5E02&View=%7B0AD3654D-1683-49D4-B06E-E30A01297337%7D;
+   Следите за обновлениями по системе на сайте ПБ, ОТ и ООС. https://intranet.kazminerals.com/group/hse/emex"""}
+
+main_menu_item2_img = {"📖График обучения для сотрудников KBL": "./images/photo_2024-01-17_10-55-10.jpg",
+                       "📖График обучения по Законодательным курсам": "./images/photo_2024-01-17_10-56-38.jpg",
+                       "📖График обучения по курсам ПромБез(СРД,ГПМ,КУ)": "./images/photo_2023-11-10_17-52-46.jpg",
+                       "📖График обучения для подрядных организаций": "./images/photo_2024-01-17_11-03-17.jpg",
+                       "📖График обучения Фабрика🏭🏭🏭 и ЭлектроБез⚡️⚡️⚡️": "./images/photo_2024-01-17_11-05-45.jpg",
+                       "Go Back":""
+                       }
 
 
 @dp.message_handler(commands=['start'])
@@ -355,6 +371,12 @@ async def echo(message: types.Message):
         for item in main_menu_item2_video.keys():
              btn = types.InlineKeyboardButton(item)
              markup.row(btn) 
+        for item in main_menu_item2_text.keys():
+             btn = types.InlineKeyboardButton(item)
+             markup.row(btn)     
+        for item in main_menu_item2_img.keys():
+             btn = types.InlineKeyboardButton(item)
+             markup.row(btn)  
         await message.answer(request, reply_markup=markup)
      
     
@@ -373,6 +395,11 @@ async def echo(message: types.Message):
      if main_menu_item2_video.get(request): 
         with open(main_menu_item2_video.get(request), 'rb') as video:
             await message.answer_video(video)
+     if main_menu_item2_text.get(request): 
+        await message.answer(main_menu_item2_text.get(request))   
+     if main_menu_item2_img.get(request): 
+        with open(main_menu_item2_img.get(request), 'rb') as photo:
+            await message.answer_photo(photo)
 
 # Go Back to main menu 
      if request == "Go Back":   
