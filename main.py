@@ -33,6 +33,8 @@ dp = Dispatcher(bot)
 
 
 
+
+
 @dp.message_handler(commands=['sba'])
 async def start(message: types.Message):
     markup = types.ReplyKeyboardMarkup()
@@ -126,9 +128,9 @@ main_menu = ["🚨🚨🚨Номера экстренных служб",
              "Базовые требования Безопасности",
              "📚📚📚Библиотека"]
 
-main_menu_item0 = ["Номер аварийного диспетчера🚨🚨🚨",
-                   "Номера медицинского пункта KBL 🚑🚑🚑",
-                   "Go Back"]
+main_menu_item0 = {"Номер аварийного диспетчера🚨🚨🚨":"Номер аварийного диспетчера \n87015555116 \n87750158555 \nСо стационарного телефона:58555",
+                   "Номера медицинского пункта KBL 🚑🚑🚑":"Номера медицинских пунктов: \n87018137003 \n87018137054 \nСо стационарного телефона:58333",
+                   "Go Back":""}
 
 main_menu_item1 = {"🆘🆘🆘Оперативные действия": """Лицо, оказывающее первую помощь, проводит следующие мероприятия по оценке обстановки и обеспечению безопасных условий для оказания первой помощи:
       1) определение угрожающих факторов для собственной жизни и здоровья;
@@ -313,7 +315,7 @@ main_menu_item1 = {"🆘🆘🆘Оперативные действия": """Л�
       5) при травме живота - в восстановительном (боковом) положении;
       6) при травме таза – на спине с валиком под коленями и слегка разведенными ногами.
       При отсутствии у пострадавшего сознания и дыхания проводятся базовые реанимационные меропрятия и обеспечивается вызов экстренных служб.""",                   
-                   "Go Back":"Go Back"}
+                   "Go Back":""}
 
 
 @dp.message_handler(commands=['start'])
@@ -336,7 +338,7 @@ async def echo(message: types.Message):
      request = message.text        
      markup = types.ReplyKeyboardMarkup()
      if request == main_menu[0]:
-        for item in main_menu_item0:
+        for item in main_menu_item0.keys():
              btn = types.InlineKeyboardButton(item)
              markup.row(btn)   
        
@@ -351,27 +353,23 @@ async def echo(message: types.Message):
  
 
 # main_menu_item0 ответы
-     if request == main_menu_item0[0]:
-        await message.answer("Номер аварийного диспетчера \n87015555116 \n87750158555 \nСо стационарного телефона:58555")
-     elif request == main_menu_item0[1]:
-         await message.answer("Номера медицинских пунктов: \n87018137003 \n87018137054 \nСо стационарного телефона:58333")
-         
+     if main_menu_item0.get(request): 
+        await message.answer(main_menu_item0.get(request))  
+        
 
 # main_menu_item1 ответы     
      if main_menu_item1.get(request): 
         await message.answer(main_menu_item1.get(request))      
-    # print(main_menu_item1.get(request))
-# go back для всех видов меню
-     if request == main_menu_item0[2] :
-        markup = types.ReplyKeyboardMarkup()
-        for item in main_menu:
-             btn1 = types.InlineKeyboardButton(item)
-             markup.row(item)  
-        await message.answer(request, reply_markup=markup)
+# Go Back to main menu 
+     if request == "Go Back":   
+         markup = types.ReplyKeyboardMarkup()
+         for item in main_menu:
+            btn = types.InlineKeyboardButton(item)
+            markup.row(btn)  
+         await message.answer("Go Back", reply_markup=markup)
 
 
-
-
+      
 
 
 
