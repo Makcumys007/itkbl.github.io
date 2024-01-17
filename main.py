@@ -350,6 +350,20 @@ main_menu_item3_video = {"🚌 Как дойти до автобусной ос�
                          "Go Back": ""}
 
 
+                         
+main_menu_item4_text = {"Как дойти до склада СИЗ?👷‍♀️👷‍♂️": "./videos/PPE_Stock.mp4",
+                         "🥾🥽👖👕🪖Как дойти до примерочной СИЗ?": "./videos/fitting_room.mp4",
+                         
+                         "✒️✒️✒️Сток коды": ["./images/photo_2024-01-17_11-43-56.jpg", "./images/photo_2024-01-17_11-45-49.jpg","./images/photo_2024-01-17_11-46-09.jpg",
+                                             "./images/photo_2024-01-17_11-46-42.jpg", "./images/photo_2024-01-17_11-47-05.jpg", "./images/photo_2024-01-17_11-47-30.jpg",
+                                             "./images/photo_2024-01-17_11-48-19.jpg", "./images/photo_2024-01-17_11-48-51.jpg", "./images/photo_2024-01-17_11-49-12.jpg",
+                                             "./images/photo_2024-01-17_11-49-37.jpg"],
+                         "📑📑📑Инструкция по примерке СИЗ":["./images/photo_2024-01-17_12-15-30.jpg", "./images/photo_2024-01-17_12-15-59.jpg",
+                                                             "./images/photo_2024-01-17_12-16-15.jpg", "./images/photo_2024-01-17_12-16-30.jpg"],
+                         "Go Back": ""
+                         }
+
+
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
     markup = types.ReplyKeyboardMarkup()
@@ -396,6 +410,25 @@ async def echo(message: types.Message):
              btn = types.InlineKeyboardButton(item)
              markup.row(btn) 
         await message.answer(request, reply_markup=markup)
+     elif request == main_menu[4]:
+        btn = types.InlineKeyboardButton("Журнал выдачи СИЗ📖📖📖", web_app=WebAppInfo(url='https://forms.office.com/pages/responsepage.aspx?id=z_7mWGUcvUKsB3AP7auruBzTOgafXchJoVQ4tPg8rEFUNFc4MVFNR1c0RlJNMkU2TVlZU0xKSDZFTi4u'))
+        markup.row(btn)
+        for item in main_menu_item4_text.keys():
+             btn = types.InlineKeyboardButton(item)
+             markup.row(btn) 
+        await message.answer(request, reply_markup=markup)
+     elif request == main_menu[5]:
+        btn = types.InlineKeyboardButton("👁👀SLAM", web_app=WebAppInfo(url='https://forms.office.com/pages/responsepage.aspx?id=z_7mWGUcvUKsB3AP7auruBzTOgafXchJoVQ4tPg8rEFURUVMQTQ5Q0w1SkcyU1NNMkhRTTBPUDIyWSQlQCNjPTEu'))
+        markup.row(btn)
+        btn2 = types.InlineKeyboardButton("🔍🔍🔍Карточка выявления опасностей", web_app=WebAppInfo(url='https://forms.office.com/pages/responsepage.aspx?id=z_7mWGUcvUKsB3AP7auruBzTOgafXchJoVQ4tPg8rEFUQUM2VkQ1TlNGRVoxTVZZSEkxWUdMV1I5NC4u'))
+        markup.row(btn2)
+        btn3 = types.InlineKeyboardButton("🤝🤝🤝Карточка взаимодействия по БиОТ", web_app=WebAppInfo(url='https://forms.office.com/pages/responsepage.aspx?id=z_7mWGUcvUKsB3AP7auruBzTOgafXchJoVQ4tPg8rEFURDdOVVFBT01SQTZFVlZUUlc3OEw1VUYyMS4u'))
+        markup.row(btn3)
+        btn4 = types.InlineKeyboardButton("📖📖📖Журнал выдачи СИЗ", web_app=WebAppInfo(url='https://forms.office.com/pages/responsepage.aspx?id=z_7mWGUcvUKsB3AP7auruBzTOgafXchJoVQ4tPg8rEFUNFc4MVFNR1c0RlJNMkU2TVlZU0xKSDZFTi4u'))
+        markup.row(btn4)
+        btn5 = types.InlineKeyboardButton("Go Back")
+        markup.row(btn5)
+        await message.answer(request, reply_markup=markup)
      
     
  
@@ -422,6 +455,16 @@ async def echo(message: types.Message):
      if main_menu_item3_video.get(request): 
         with open(main_menu_item3_video.get(request), 'rb') as video:
             await message.answer_video(video)
+            
+
+            
+# main_menu_item4 ответы 
+
+     if isinstance(main_menu_item4_text.get(request), list): 
+        for i in main_menu_item4_text.get(request):
+            with open(i, 'rb') as photo:
+                await message.answer_photo(photo)        
+
 
 # Go Back to main menu 
      if request == "Go Back":   
