@@ -336,6 +336,19 @@ main_menu_item2_img = {"📖График обучения для сотрудн�
                        "Go Back":""
                        }
 
+main_menu_item3_video = {"🚌 Как дойти до автобусной остановки?":"./videos/bus_stop.mp4",
+                         "Как дойти до склада СИЗ?👷‍♀️👷‍♂️": "./videos/PPE_Stock.mp4",
+                         "🥾🥽👖👕🪖Как дойти до примерочной СИЗ?": "./videos/fitting_room.mp4",
+                         "🚪🚪🚪Как пройти в кабинет №16(АРХИВ)?": "./videos/16_cab.mp4",
+                         "🔥🧯👩‍🚒Где проходит курс по ПТМ?": "./videos/ptm.mp4",
+                         "🖥🖥🖥Где проводится проверка знаний по курсам ПромБез/БиОТ для ИТР?": "./videos/prombiot.mp4",
+                         "🖥🖥🖥Где проводится обучение/проверка знаний по курсам ПромБез/БиОТ по рабочим профессиям?": "./videos/prombiotrab.mp4",
+                         "🏭🏭🏭Где проходят курсы по Фабрике/внешнее обучения по профессиям?":"./videos/factory.mp4",
+                         "⚡️💡🔌Где проходят курсы по Электробезопасности?":"./videos/electrocity.mp4",
+                         "🚗🚛🚚🚙Где проходят курсы по Вождению(управления ТС на территории компании)?":"./videos/vechicle.mp4",
+                         "🚜🛠🚧Где проходят курсы обучения по Карьеру/ММА??": "./videos/vechiclemma.mp4",
+                         "Go Back": ""}
+
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
@@ -377,6 +390,11 @@ async def echo(message: types.Message):
         for item in main_menu_item2_img.keys():
              btn = types.InlineKeyboardButton(item)
              markup.row(btn)  
+        await message.answer(request, reply_markup=markup)        
+     elif request == main_menu[3]:
+        for item in main_menu_item3_video.keys():
+             btn = types.InlineKeyboardButton(item)
+             markup.row(btn) 
         await message.answer(request, reply_markup=markup)
      
     
@@ -400,6 +418,10 @@ async def echo(message: types.Message):
      if main_menu_item2_img.get(request): 
         with open(main_menu_item2_img.get(request), 'rb') as photo:
             await message.answer_photo(photo)
+# main_menu_item3 ответы 
+     if main_menu_item3_video.get(request): 
+        with open(main_menu_item3_video.get(request), 'rb') as video:
+            await message.answer_video(video)
 
 # Go Back to main menu 
      if request == "Go Back":   
