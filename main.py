@@ -536,8 +536,8 @@ async def web_app(message: types.Message):
          employeId = int(employeId) 
          for emp in employees:
             if emp.employId == employeId:                
-                await message.reply(emp)
-                await message.reply(emp.get_sba(sba))
+                await message.answer(emp)
+                await message.answer(emp.get_sba(sba))
 
 
 # Запуск бота
