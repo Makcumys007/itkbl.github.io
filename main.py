@@ -18,7 +18,8 @@ from get_employee import print_table, trim_date
 dotenv_path = "env.env"
 
 # Загружаем переменные окружения
-load_dotenv(dotenv_path)
+
+load_dotenv(dotenv_path, encoding="cp1251")
 TOKEN = os.getenv("TOKEN2")
 EXCEL_FILE = os.getenv("EXCEL_FILE")
 

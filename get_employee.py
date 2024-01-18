@@ -62,6 +62,7 @@ def trim_date(date):
     if isinstance(date, datetime.datetime):
         datetime_object = datetime.datetime.strptime(str(date), "%Y-%m-%d %H:%M:%S")
         return datetime_object.date().strftime("%d.%m.%Y")
+    return date
 
 def print_table(filename):
     # Открываем файл Excel
@@ -94,11 +95,11 @@ def print_table(filename):
 if __name__ == "__main__":
    # filename = "//10.34.3.20/distr$/Telegram.xlsx"
     
-    filename = "//10.34.32.176/T&D$/04 - HSE Training - Обучение ОТиТБ/04-20 Reports/Отчеты по внутренним курсам/Telegram.xlsx"
+    filename = "//10.34.3.176/T&D$/04 - HSE Training - Обучение ОТиТБ/04-20 Reports/Отчеты по внутренним курсам/Telegram.xlsx"
     if os.path.exists(filename) and os.path.isfile(filename):        
         employees = print_table(filename)
         for emp in employees:
-            if emp.employId == 395:
+            if emp.employId == 9776:
                 print(emp) 
                 print(emp.get_sba('SBA061'))
                 print(emp.get_sba('SBA130'))
