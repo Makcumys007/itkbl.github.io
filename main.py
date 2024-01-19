@@ -112,11 +112,6 @@ async def start(message: types.Message):
     markup.row(btn34) 
 
 
-
-
-
-
-    time.sleep(2)
     await message.answer('Ждите...', reply_markup=markup)
 
 
@@ -382,8 +377,6 @@ async def start(message: types.Message):
 
     text="Добро пожаловать в бот безопасности! Выберите раздел, который вас интересует:"
 
-
-    time.sleep(2)
     await message.answer(text, reply_markup=markup)
     
 

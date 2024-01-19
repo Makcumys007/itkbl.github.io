@@ -41,7 +41,7 @@ class Employee:
             'SBA034': f"БиОТ для ИТР: Дата посл.прохождения {trim_date(self.dates[44])}, Дата след.прохождения {trim_date(self.dates[45])}",             
             'SBA035': f"БиОТ для рабочих: Дата посл.прохождения {trim_date(self.dates[46])}, Дата след.прохождения {trim_date(self.dates[47])}",             
             'SBA036': f"ПТМ ежегодно: Дата посл.прохождения {trim_date(self.dates[48])}, Дата след.прохождения {trim_date(self.dates[49])}",             
-            'SBA077': f"ПТМ один раз в три года: Дата посл.прохождения {trim_date(self.dates[50])}, Дата след.прохождения {trim_date(self.dates[51])}",   
+            'SBA077': f"ПТМ один раз в три года: Дата посл.прохождения {trim_date(self.dates[50])}, Дата след.прохождения {trim_date(self.dates[51])}",  
             
             'SBA003': f"Выявление опасных факторов: Дата посл.прохождения {trim_date(self.dates[52])}, Дата след.прохождения {trim_date(self.dates[53])}",
             'SBA001': f"Первая помощь: Дата посл.прохождения {trim_date(self.dates[54])}, Дата след.прохождения {trim_date(self.dates[55])}",
@@ -63,7 +63,6 @@ def trim_date(date):
     if isinstance(date, datetime.datetime):
         datetime_object = datetime.datetime.strptime(str(date), "%Y-%m-%d %H:%M:%S")
         return datetime_object.date().strftime("%d.%m.%Y")
-    print(date)
     return date
 
 def print_table(filename):
@@ -81,7 +80,6 @@ def print_table(filename):
     for row in all_rows:
         employee = Employee(row[0], row[1], row[2:])       
         employees.append(employee)
-
     return employees
 
              
