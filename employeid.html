@@ -53,8 +53,6 @@
 
         let tg = window.Telegram.WebApp;
         let find = document.getElementById("find");
-        let error = document.getElementById("error");
-   
         // Open full screen mode on smartphone
         tg.expand()
 
@@ -63,7 +61,7 @@
         find.addEventListener("click", () => {
 
             let employeId = document.getElementById("employeId").value;
-
+            console.log(employeId)
           
             let url = location.search;
 
