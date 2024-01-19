@@ -1,4 +1,4 @@
-import pandas
+import openpyxl
 import datetime
 import os
 
@@ -67,15 +67,19 @@ def trim_date(date):
     return date
 
 def print_table(filename):
-    df = pandas.read_excel(filename, sheet_name='ПромБеЗ общие курсы')
-        # Поместить данные первой строки в массив
-    sheet = df.to_numpy()
+    # Открываем файл Excel
+    workbook = openpyxl.load_workbook(filename)
+
+    # Получаем лист
+    sheet = workbook.active
+
+    # Цикл по строкам
     all_rows = []
-    for row in sheet[1:]:
+    for row in sheet.iter_rows(min_row=3):
         # Цикл по столбцам
         row_data = []
         for cell in row:
-            row_data.append(cell)
+            row_data.append(cell.value)
         all_rows.append(row_data)
     employees = []
     for row in all_rows:
@@ -97,9 +101,10 @@ if __name__ == "__main__":
     if os.path.exists(filename) and os.path.isfile(filename):        
         employees = print_table(filename)
         for emp in employees:
-            if emp.employId == 7833:
+            if emp.employId == 9776:
                 print(emp) 
                 print(emp.get_sba('SBA061'))
+                print(emp.get_sba('SBA130'))
   
 
 
