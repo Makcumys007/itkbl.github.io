@@ -34,8 +34,7 @@
         <div class="form-group">
             <input type="submit" id="find" class="btn btn-outline-light btn-block" value="Найти">
         </div>  
-        
-        <div id="error" class="text-danger"></div>
+ 
     </div> 
     </div>
 
@@ -65,11 +64,7 @@
 
             let employeId = document.getElementById("employeId").value;
 
-            if (isNan(emplemployeId)) {
-                error.innerText = 'Введите правильный табельный номер!';
-                return;
-            }
-
+          
             let url = location.search;
 
             let sba = url.split("=")[1];
