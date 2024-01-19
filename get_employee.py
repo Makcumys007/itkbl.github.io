@@ -52,7 +52,15 @@ class Employee:
             'SBA060': f"Владелец личного замка: Дата посл.прохождения {trim_date(self.dates[64])}, Дата след.прохождения {trim_date(self.dates[65])}",            
             'SBA009': f"Работы на высоте: Дата посл.прохождения {trim_date(self.dates[66])}, Дата след.прохождения {trim_date(self.dates[67])}",
             
+            'EL01': f"Электробез 1 группа {trim_date(self.dates[68])}, Дата след.прохождения {trim_date(self.dates[69])}",
+            'EL02': f"Электробез 2 группа {trim_date(self.dates[70])}, Дата след.прохождения {trim_date(self.dates[71])}",
+            'EL03': f"Электробез 3 группа {trim_date(self.dates[72])}, Дата след.прохождения {trim_date(self.dates[73])}",
+            'EL04': f"Электробез 4 группа {trim_date(self.dates[74])}, Дата след.прохождения {trim_date(self.dates[75])}",
+            'EL05': f"Электробез 5 группа {trim_date(self.dates[76])}, Дата след.прохождения {trim_date(self.dates[77])}",
             
+            'DRV': f"Право на вождение по сайту {trim_date(self.dates[78])}, Дата след.прохождения {trim_date(self.dates[79])}",
+            'DRVM': f"Допуск в карьер {trim_date(self.dates[80])}, Дата след.прохождения {trim_date(self.dates[81])}",
+            'ABC': f"Антикоррупционные политики {trim_date(self.dates[80])}, Дата след.прохождения {trim_date(self.dates[81])}",
 
             }
         return sba[course]

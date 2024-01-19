@@ -33,84 +33,60 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
 
+courses = {"SBA061": "Ответственный за изоляцию",
+"SBA130": "Управление подрядными организациями",
+"SBA143": "Контроль за состоянием лесов",
+"SBA106": "Ответственные лица по надзору за безопасной эксплуатацией грузоподъемных кранов, подъемников, съемных грузозахватных приспособлений и тары (Каждые 3 года)",
+"SBA107": "Ответственные лица за безопасное производство работ кранами по перемещению грузов (ежегодн",
+"SBA108": "Ответственные лица за содержание грузоподъемных кранов, крановых путей и подъемников в исправном состоянии (Каждые 3 год",
+"SBA053": "Работники, допущенные к управлению самоходным телескопическим подъемником и автогидроподъемником ежегодно",
+"SBA113": "Персонал, имеющий смежную профессию Стропальщик ежегодно",
+"SBA109": "Персонал, имеющий смежную профессию рабочий с правом управления грузоподъемными механизмами с пола ежегодно",
+"SBA054": "Лица, допущенные к самостоятельной работе в качестве машиниста крана  ежегодно",
+"SBA055": "Работники, допущенные к управлению вилочным погрузчиком",
+"SBA137": "ИТР, ответственный по надзору за техническим состоянием и эксплуатацией сосудов",
+"SBA147": "ИТР, ответственный по надзору за безопасной эксплуатаций КС и СРД",
+"SBA029_1": "ИТР Ответственные за исправное состояние и безопасное действие сосудов",
+"SBA146": "ИТР Ответственный за исправное состояние КС и СРД",
+"SBA116_1": "Ответственные за исп. сост. и безопасную эксплуатацию котлов",
+"SBA029": "Ответственные за исп. сост. и безопасную экспл-ю трубопроводов",
+"SBA045": "Лица, из числа обслуж.персонала с правом обслуживания сосудов и трубопроводов",
+"SBA114": "Лица, допущенные к самостоятельному обслуж. КУ",
+"SBA116": "Лица по обслуживанию котлов",
+"SBA023": "ПромБез для работников",
+"SBA024": "ПромБез для ИТР",
+"SBA034": "БиОТ для ИТР",
+"SBA035": "БиОТ для рабочих",
+"SBA036": "ПТМ ежегодно",
+"SBA077": "ПТМ один раз в три года",
+"SBA003": "Выявление опасных факторов",
+"SBA001": "Первая помощь",
+"SBA033": "Наряд-допуск",
+"SBA007": "Анализ безопасности работ",
+"SBA138": "ICAM факторов",
+"SBA022": "Safety Leadership",
+"SBA060": "Владелец личного замка",
+"SBA009": "Работы на высоте",
+
+"EL01": "Электробез 1 группа",                               
+"EL02": "Электробез 2 группа",                               
+"EL03": "Электробез 3 группа",                               
+"EL04": "Электробез 4 группа",                               
+"EL05": "Электробез 5 группа",                               
+
+"DRV": "Право на вождение по сайту",                               
+"DRVM": "Допуск в карьер",                               
+"ABC": "Антикоррупционные политики",                                                              
+}
 
 
 
 @dp.message_handler(commands=['sba'])
 async def start(message: types.Message):
     markup = types.ReplyKeyboardMarkup()
-    btn1 = types.InlineKeyboardButton("Ответственный за изоляцию", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA061'))
-    markup.row(btn1)  
-    btn2 = types.InlineKeyboardButton("Управление подрядными организациями", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA130'))
-    markup.row(btn2) 
-    btn3 = types.InlineKeyboardButton("Контроль за состоянием лесов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA143'))
-    markup.row(btn3) 
-    btn4 = types.InlineKeyboardButton("Ответственные лица по надзору за безопасной эксплуатацией грузоподъемных кранов, подъемников, съемных грузозахватных приспособлений и тары (Каждые 3 года)", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA106'))
-    markup.row(btn4) 
-    btn5 = types.InlineKeyboardButton("Ответственные лица за безопасное производство работ кранами по перемещению грузов (ежегодно)", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA107'))
-    markup.row(btn5) 
-    btn6 = types.InlineKeyboardButton("Ответственные лица за содержание грузоподъемных кранов, крановых путей и подъемников в исправном состоянии (Каждые 3 года)", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA108'))
-    markup.row(btn6)               
-    btn7 = types.InlineKeyboardButton("Работники, допущенные к управлению самоходным телескопическим подъемником и автогидроподъемником ежегодно", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA053'))
-    markup.row(btn7)               
-    btn8 = types.InlineKeyboardButton("Персонал, имеющий смежную профессию Стропальщик ежегодно", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA113'))
-    markup.row(btn8)               
-    btn9 = types.InlineKeyboardButton("Персонал, имеющий смежную профессию рабочий с правом управления грузоподъемными механизмами с пола ежегодно", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA109'))
-    markup.row(btn9)               
-    btn10 = types.InlineKeyboardButton("Лица, допущенные к самостоятельной работе в качестве машиниста крана  ежегодно", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA054'))
-    markup.row(btn10)               
-    btn11 = types.InlineKeyboardButton("Работники, допущенные к управлению вилочным погрузчиком", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA055'))
-    markup.row(btn11)               
-    btn12 = types.InlineKeyboardButton("ИТР, ответственный по надзору за техническим состоянием и эксплуатацией сосудов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA137'))
-    markup.row(btn12)               
-    btn13 = types.InlineKeyboardButton("ИТР, ответственный по надзору за безопасной эксплуатаций КС и СРД", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA147'))
-    markup.row(btn13)               
-    btn14 = types.InlineKeyboardButton("ИТР Ответственные за исправное состояние и безопасное действие сосудов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA029_1'))
-    markup.row(btn14)               
-    btn15 = types.InlineKeyboardButton("ИТР Ответственный за исправное состояние КС и СРД", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA146'))
-    markup.row(btn15)               
-    btn16 = types.InlineKeyboardButton("Ответственные за исп. сост. и безопасную эксплуатацию котлов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA116_1'))
-    markup.row(btn16)               
-    btn17 = types.InlineKeyboardButton("Ответственные за исп. сост. и безопасную экспл-ю трубопроводов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA029'))
-    markup.row(btn17)               
-    btn18 = types.InlineKeyboardButton("Лица, из числа обслуж.персонала с правом обслуживания сосудов и трубопроводов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA045'))
-    markup.row(btn18)               
-    btn19 = types.InlineKeyboardButton("Лица, допущенные к самостоятельному обслуж. КУ", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA114'))
-    markup.row(btn19)               
-    btn20 = types.InlineKeyboardButton("Лица по обслуживанию котлов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA116'))
-    markup.row(btn20)               
-    btn21 = types.InlineKeyboardButton("ПромБез для работников", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA023'))
-    markup.row(btn21)               
-    btn22 = types.InlineKeyboardButton("ПромБез для ИТР", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA024'))
-    markup.row(btn22)               
-    btn23 = types.InlineKeyboardButton("БиОТ для ИТР", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA034'))
-    markup.row(btn23)               
-    btn24 = types.InlineKeyboardButton("БиОТ для рабочих", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA035'))
-    markup.row(btn24)               
-    btn25 = types.InlineKeyboardButton("ПТМ ежегодно", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA036'))
-    markup.row(btn25)               
-    btn26 = types.InlineKeyboardButton("ПТМ один раз в три года", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA077'))
-    markup.row(btn26)  
-    btn27 = types.InlineKeyboardButton("Выявление опасных факторов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA003'))
-    markup.row(btn27) 
-    
-    btn28 = types.InlineKeyboardButton("Первая помощь", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA001'))
-    markup.row(btn28) 
-    btn29 = types.InlineKeyboardButton("Наряд-допуск", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA033'))
-    markup.row(btn29) 
-    
-
-    btn30 = types.InlineKeyboardButton("Анализ безопасности работ", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA007'))
-    markup.row(btn30) 
-    btn31 = types.InlineKeyboardButton("ICAM факторов", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA138'))
-    markup.row(btn31) 
-    btn32 = types.InlineKeyboardButton("Safety Leadership", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA022'))
-    markup.row(btn32)     
-    btn33 = types.InlineKeyboardButton("Владелец личного замка", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA060'))
-    markup.row(btn33)     
-    btn34 = types.InlineKeyboardButton("Работы на высоте", web_app=WebAppInfo(url='https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=SBA009'))
-    markup.row(btn34) 
-
+    for key, value in courses.items():    
+        btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
+        markup.row(btn)  
 
     await message.answer('Ждите...', reply_markup=markup)
 
@@ -371,8 +347,8 @@ main_menu_item6_img = {"11 правил goalzero":["./images/photo_2024-01-17_12
 async def start(message: types.Message):
     markup = types.ReplyKeyboardMarkup()
     for item in main_menu:
-             btn1 = types.InlineKeyboardButton(item)
-             markup.row(item)  
+             btn = types.InlineKeyboardButton(item)
+             markup.row(btn)  
 
 
     text="Добро пожаловать в бот безопасности! Выберите раздел, который вас интересует:"
