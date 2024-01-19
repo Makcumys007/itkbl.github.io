@@ -54,7 +54,7 @@
 
         let tg = window.Telegram.WebApp;
         let find = document.getElementById("find");
-
+        let error = document.getElementById("error");
    
         // Open full screen mode on smartphone
         tg.expand()
@@ -64,6 +64,12 @@
         find.addEventListener("click", () => {
 
             let employeId = document.getElementById("employeId").value;
+
+            if (isNan(emplemployeId)) {
+                error.innerText = 'Введите правильный табельный номер!';
+                return;
+            }
+
             let url = location.search;
 
             let sba = url.split("=")[1];
