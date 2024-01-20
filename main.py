@@ -504,12 +504,18 @@ async def web_app(message: types.Message):
     lastname = result["lastname"]
     sba = result["sba"]
     print(sba)
+    is_employee = True
     if employeId.isdigit():
          employeId = int(employeId) 
          for emp in employees:
             if emp.employId == employeId and lastname.lower() in emp.fullname.lower():                
                 await message.answer(emp)
                 await message.answer(emp.get_sba(sba))
+            else:
+                is_employee = False
+    
+    if not is_employee:
+        await message.answer("Нет такого рботника, или он не добавлен в базу данных.")
 
 
 # Запуск бота
