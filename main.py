@@ -20,6 +20,7 @@ dotenv_path = "env.env"
 # Загружаем переменные окружения
 
 load_dotenv(dotenv_path, encoding="cp1251")
+
 TOKEN = os.getenv("TOKEN2")
 EXCEL_FILE = os.getenv("EXCEL_FILE")
 
@@ -500,12 +501,13 @@ async def echo(message: types.Message):
 async def web_app(message: types.Message):
     result = json.loads(message.web_app_data.data) 
     employeId = result["employeId"]
+    lastname = result["lastname"]
     sba = result["sba"]
     print(sba)
     if employeId.isdigit():
          employeId = int(employeId) 
          for emp in employees:
-            if emp.employId == employeId:                
+            if emp.employId == employeId and lastname.lower() in emp.fullname.lower():                
                 await message.answer(emp)
                 await message.answer(emp.get_sba(sba))
 
