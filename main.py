@@ -464,18 +464,18 @@ async def echo(message: types.Message):
          for key, value in courses_oc.items():    
             btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
             markup.row(btn)  
-         await message.answer("", reply_markup=markup)
+         await message.answer("Выберите курс обучения!", reply_markup=markup)
      elif request == sba_menu[1]:
          for key, value in courses_ic.items():    
             btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
             markup.row(btn)  
-         await message.answer("", reply_markup=markup)
+         await message.answer("Выберите курс обучения!", reply_markup=markup)
          
      elif request == sba_menu[2]:
          for key, value in courses_el.items():    
             btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
             markup.row(btn)  
-         await message.answer("", reply_markup=markup)
+         await message.answer("Выберите курс обучения!", reply_markup=markup)
     
  
 
