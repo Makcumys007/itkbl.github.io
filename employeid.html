@@ -26,10 +26,10 @@
 
     <div class="home">
         <div id="form" class="container">
-            <div class="form-group">
+         <!---   <div class="form-group">
                 <label id="label-employeId" class="text-light" for="employeId">Табельный номер </label><span class="text-danger"> *</span>
                 <input class="form-control" type="number" id="employeId" placeholder="7833">
-            </div>
+            </div> --->
             <div class="form-group">
                 <label id="label-lastname" class="text-light" for="lastname">Фамилия </label><span class="text-danger"> *</span>
                 <input class="form-control" type="text" id="lastname" placeholder="Оспанов">
@@ -64,7 +64,7 @@
 
         find.addEventListener("click", () => {
 
-            let employeId = document.getElementById("employeId").value;
+         //   let employeId = document.getElementById("employeId").value;
             let lastname = document.getElementById("lastname").value;
             console.log(employeId)
           
@@ -76,7 +76,7 @@
            
            // Sending data to telegram bot
            let data = {
-               employeId: employeId,
+         //      employeId: employeId,
                lastname: lastname,
                sba: sba,
            }

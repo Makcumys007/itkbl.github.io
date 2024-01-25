@@ -33,6 +33,10 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
+sba_menu = ["Курсы ОТиТБ",
+             "Электробезопасность",
+             "ПДД"]
+
 
 courses = {"SBA061": "Ответственный за изоляцию",
 "SBA130": "Управление подрядными организациями",
@@ -85,10 +89,13 @@ courses = {"SBA061": "Ответственный за изоляцию",
 @dp.message_handler(commands=['sba'])
 async def start(message: types.Message):
     markup = types.ReplyKeyboardMarkup()
+    
+    
+
     for key, value in courses.items():    
         btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
-        markup.row(btn)  
-
+        markup.row(btn
+)  
     await message.answer('Ждите...', reply_markup=markup)
 
 
@@ -504,18 +511,16 @@ async def web_app(message: types.Message):
     lastname = result["lastname"]
     sba = result["sba"]
     print(sba)
-    is_employee = True
+ 
     if employeId.isdigit():
          employeId = int(employeId) 
          for emp in employees:
-            if emp.employId == employeId and lastname.lower() in emp.fullname.lower():                
+            if lastname.lower() in emp.fullname.lower():
+              #  if employeId == emp.employId: 
                 await message.answer(emp)
                 await message.answer(emp.get_sba(sba))
-            else:
-                is_employee = False
+           
     
-    if not is_employee:
-        await message.answer("Нет такого рботника, или он не добавлен в базу данных.")
 
 
 # Запуск бота
