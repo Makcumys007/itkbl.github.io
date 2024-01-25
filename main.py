@@ -511,14 +511,15 @@ async def web_app(message: types.Message):
     lastname = result["lastname"]
     sba = result["sba"]
     print(sba)
- 
     if employeId.isdigit():
         employeId = int(employeId) 
-        for emp in employees:
-            if (lastname in emp.fullname) == True and employeId == emp.employId:
-                #  if employeId == emp.employId: 
-                await message.answer(emp)
-                await message.answer(emp.get_sba(sba))
+        
+    if lastname == "":
+        lastname = '8888'
+    for emp in employees:
+        if (emp.fullname.find(lastname) != -1) and (employeId == emp.employId):        
+            await message.answer(emp)
+            await message.answer(emp.get_sba(sba))
            
     
 
