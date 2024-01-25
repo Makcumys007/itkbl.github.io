@@ -103,7 +103,8 @@ if __name__ == "__main__":
     if os.path.exists(filename) and os.path.isfile(filename):        
         employees = print_table(filename)
         for emp in employees:
-            if emp.employId == 7834 and 'Абылкасов' in emp.fullname :
+            if emp.employId == 7833 and 'Абылкасов' in emp.fullname :
+                print('Абылкасов' in emp.fullname)
                 print(emp) 
                 print(emp.get_sba('SBA061'))
   

@@ -507,18 +507,18 @@ async def echo(message: types.Message):
 @dp.message_handler(content_types=['web_app_data'])
 async def web_app(message: types.Message):
     result = json.loads(message.web_app_data.data) 
-    employeId = int(result["employeId"])
+    employeId = result["employeId"]
     lastname = result["lastname"]
     sba = result["sba"]
     print(sba)
  
-   # if employeId.isdigit():
-        # employeId = int(employeId) 
-    for emp in employees:
-        if lastname in emp.fullname and employeId == emp.employId:
-            #  if employeId == emp.employId: 
-            await message.answer(emp)
-            await message.answer(emp.get_sba(sba))
+    if employeId.isdigit():
+        employeId = int(employeId) 
+        for emp in employees:
+            if (lastname in emp.fullname) == True and employeId == emp.employId:
+                #  if employeId == emp.employId: 
+                await message.answer(emp)
+                await message.answer(emp.get_sba(sba))
            
     
 
