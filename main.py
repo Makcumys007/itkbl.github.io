@@ -96,7 +96,7 @@ async def start(message: types.Message):
         btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
         markup.row(btn
 )  
-    await message.answer('Ждите...', reply_markup=markup)
+    await message.answer('Выберите курс обучения!', reply_markup=markup)
 
 
 main_menu = ["🚨🚨🚨Номера экстренных служб",
@@ -507,18 +507,18 @@ async def echo(message: types.Message):
 @dp.message_handler(content_types=['web_app_data'])
 async def web_app(message: types.Message):
     result = json.loads(message.web_app_data.data) 
-    employeId = result["employeId"]
+    employeId = int(result["employeId"])
     lastname = result["lastname"]
     sba = result["sba"]
     print(sba)
  
-    if employeId.isdigit():
-         employeId = int(employeId) 
-         for emp in employees:
-            if lastname.lower() in emp.fullname.lower():
-              #  if employeId == emp.employId: 
-                await message.answer(emp)
-                await message.answer(emp.get_sba(sba))
+   # if employeId.isdigit():
+        # employeId = int(employeId) 
+    for emp in employees:
+        if lastname in emp.fullname and employeId == emp.employId:
+            #  if employeId == emp.employId: 
+            await message.answer(emp)
+            await message.answer(emp.get_sba(sba))
            
     
 

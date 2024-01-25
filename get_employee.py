@@ -86,7 +86,7 @@ def print_table(filename):
         all_rows.append(row_data)
     employees = []
     for row in all_rows:
-        employee = Employee(row[0], row[1], row[2:])       
+        employee = Employee(int(row[0]), row[1], row[2:])       
         employees.append(employee)
     return employees
 
@@ -95,5 +95,17 @@ def print_table(filename):
 
 
 
+
+if __name__ == "__main__":
+   # filename = "//10.34.3.20/distr$/Telegram.xlsx"
+    
+    filename = "//10.34.3.176/T&D$/04 - HSE Training - Обучение ОТиТБ/04-20 Reports/Отчеты по внутренним курсам/Telegram.xlsx"
+    if os.path.exists(filename) and os.path.isfile(filename):        
+        employees = print_table(filename)
+        for emp in employees:
+            if emp.employId == 7834 and 'Абылкасов' in emp.fullname :
+                print(emp) 
+                print(emp.get_sba('SBA061'))
+  
 
 
