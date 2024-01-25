@@ -35,7 +35,8 @@ dp = Dispatcher(bot)
 
 sba_menu = ["Внешние курсы",
              "Внутренние курсы",
-             "Электробез",]
+             "Электробез",
+             "ПДД"]
 
 
 courses_oc = {
@@ -44,9 +45,7 @@ courses_oc = {
     "SBA034": "БиОТ для ИТР",
     "SBA035": "БиОТ для рабочих",
     "SBA036": "ПТМ ежегодно",
-    "SBA077": "ПТМ один раз в три года",
-    "SBA009": "Работы на высоте",
-    "SBA143": "Контроль за состоянием лесов",
+    "SBA077": "ПТМ один раз в три года",    
     "SBA106": "Ответственные лица по надзору за безопасной эксплуатацией грузоподъемных кранов, подъемников, съемных грузозахватных приспособлений и тары (Каждые 3 года)",
     "SBA107": "Ответственные лица за безопасное производство работ кранами по перемещению грузов (ежегодн",
     "SBA108": "Ответственные лица за содержание грузоподъемных кранов, крановых путей и подъемников в исправном состоянии (Каждые 3 год",
@@ -63,11 +62,7 @@ courses_oc = {
     "SBA029": "Ответственные за исп. сост. и безопасную экспл-ю трубопроводов",
     "SBA045": "Лица, из числа обслуж.персонала с правом обслуживания сосудов и трубопроводов",
     "SBA114": "Лица, допущенные к самостоятельному обслуж. КУ",
-    "SBA116": "Лица по обслуживанию котлов",   
-         
-    "DRV": "Право на вождение по сайту",                               
-    "DRVM": "Допуск в карьер",  
-
+    "SBA116": "Лица по обслуживанию котлов",       
 }
 
 
@@ -83,8 +78,8 @@ courses_ic = {
     "SBA130": "Управление подрядными организациями",
     "SBA138": "ICAM факторов",
     "SBA143": "Контроль за состоянием лесов",
-    
-                                                    
+    "SBA009": "Работы на высоте",
+    "SBA143": "Контроль за состоянием лесов",                                                     
 }
 
 courses_el = {
@@ -93,6 +88,11 @@ courses_el = {
     "EL03": "Электробез 3 группа",                               
     "EL04": "Электробез 4 группа",                               
     "EL05": "Электробез 5 группа",  
+    }
+
+courses_pdd = {
+    "DRV": "Право на вождение по сайту",                               
+    "DRVM": "Допуск в карьер",
     }
 
 
@@ -464,17 +464,31 @@ async def echo(message: types.Message):
          for key, value in courses_oc.items():    
             btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
             markup.row(btn)  
+         btn14 = types.InlineKeyboardButton("Go Back!")
+         markup.row(btn14) 
          await message.answer("Выберите курс обучения!", reply_markup=markup)
      elif request == sba_menu[1]:
          for key, value in courses_ic.items():    
             btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
             markup.row(btn)  
+         btn14 = types.InlineKeyboardButton("Go Back!")
+         markup.row(btn14)
          await message.answer("Выберите курс обучения!", reply_markup=markup)
          
      elif request == sba_menu[2]:
          for key, value in courses_el.items():    
             btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
             markup.row(btn)  
+         btn14 = types.InlineKeyboardButton("Go Back!")
+         markup.row(btn14)
+         await message.answer("Выберите курс обучения!", reply_markup=markup)
+         
+     elif request == sba_menu[3]:
+         for key, value in courses_pdd.items():    
+            btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
+            markup.row(btn)  
+         btn14 = types.InlineKeyboardButton("Go Back!")
+         markup.row(btn14)
          await message.answer("Выберите курс обучения!", reply_markup=markup)
     
  
@@ -521,6 +535,14 @@ async def echo(message: types.Message):
      if request == "Go Back":   
          markup = types.ReplyKeyboardMarkup()
          for item in main_menu:
+            btn = types.InlineKeyboardButton(item)
+            markup.row(btn)  
+         await message.answer("Go Back", reply_markup=markup)
+         
+# Go Back to main menu 
+     if request == "Go Back!":   
+         markup = types.ReplyKeyboardMarkup()
+         for item in sba_menu:
             btn = types.InlineKeyboardButton(item)
             markup.row(btn)  
          await message.answer("Go Back", reply_markup=markup)

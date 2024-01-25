@@ -60,7 +60,7 @@ class Employee:
             
             'DRV': f"Право на вождение по сайту {trim_date(self.dates[78])}, Дата след.прохождения {trim_date(self.dates[79])}",
             'DRVM': f"Допуск в карьер {trim_date(self.dates[80])}, Дата след.прохождения {trim_date(self.dates[81])}",
-            'ABC': f"Антикоррупционные политики {trim_date(self.dates[80])}, Дата след.прохождения {trim_date(self.dates[81])}",
+            'ABC': f"Антикоррупционные политики {trim_date(self.dates[82])}, Дата след.прохождения {trim_date(self.dates[83])}",
 
             }
         return sba[course]
