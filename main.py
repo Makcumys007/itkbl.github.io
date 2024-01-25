@@ -545,7 +545,10 @@ async def echo(message: types.Message):
          for item in sba_menu:
             btn = types.InlineKeyboardButton(item)
             markup.row(btn)  
-         await message.answer("Go Back", reply_markup=markup)
+         btn = types.InlineKeyboardButton("Антикоррупционные политики", web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=ABC"))
+         markup.row(btn) 
+         await message.answer('Выберите курс обучения!', reply_markup=markup)
+   
 
        
 
@@ -572,9 +575,10 @@ async def web_app(message: types.Message):
             break
         else:
             is_employee = True
-            
     if is_employee:
-        await message.answer('Для записи на курс обучения, пройдите по указанной ссылке: https://mykazmin.kazminerals.com/kzm-front/#/courseScheduleList')
+        await message.answer('Вы не правильно ввели табельный номер или фамилию!')
+    await message.answer('Для записи на курс обучения, пройдите по указанной ссылке: https://mykazmin.kazminerals.com/kzm-front/#/courseScheduleList')
+    
            
     
 
