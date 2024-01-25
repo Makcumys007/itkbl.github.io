@@ -34,7 +34,8 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
 sba_menu = ["Внешние курсы",
-             "Внутренние курсы",]
+             "Внутренние курсы",
+             "Электробез",]
 
 
 courses_oc = {
@@ -62,12 +63,8 @@ courses_oc = {
     "SBA029": "Ответственные за исп. сост. и безопасную экспл-ю трубопроводов",
     "SBA045": "Лица, из числа обслуж.персонала с правом обслуживания сосудов и трубопроводов",
     "SBA114": "Лица, допущенные к самостоятельному обслуж. КУ",
-    "SBA116": "Лица по обслуживанию котлов",    
-    "EL01": "Электробез 1 группа",                               
-    "EL02": "Электробез 2 группа",                               
-    "EL03": "Электробез 3 группа",                               
-    "EL04": "Электробез 4 группа",                               
-    "EL05": "Электробез 5 группа",       
+    "SBA116": "Лица по обслуживанию котлов",   
+         
     "DRV": "Право на вождение по сайту",                               
     "DRVM": "Допуск в карьер",  
 
@@ -86,9 +83,17 @@ courses_ic = {
     "SBA130": "Управление подрядными организациями",
     "SBA138": "ICAM факторов",
     "SBA143": "Контроль за состоянием лесов",
-    "ABC": "Антикоррупционные политики",   
+    
                                                     
 }
+
+courses_el = {
+    "EL01": "Электробез 1 группа",                               
+    "EL02": "Электробез 2 группа",                               
+    "EL03": "Электробез 3 группа",                               
+    "EL04": "Электробез 4 группа",                               
+    "EL05": "Электробез 5 группа",  
+    }
 
 
 @dp.message_handler(commands=['sba'])
@@ -98,6 +103,9 @@ async def start(message: types.Message):
     for k in sba_menu:    
         btn = types.InlineKeyboardButton(k)
         markup.row(btn)  
+        
+    btn = types.InlineKeyboardButton("Антикоррупционные политики", web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba=ABC"))
+    markup.row(btn) 
     await message.answer('Выберите курс обучения!', reply_markup=markup)
 
 
@@ -456,12 +464,18 @@ async def echo(message: types.Message):
          for key, value in courses_oc.items():    
             btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
             markup.row(btn)  
-         await message.answer(value, reply_markup=markup)
+         await message.answer("", reply_markup=markup)
      elif request == sba_menu[1]:
          for key, value in courses_ic.items():    
             btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
             markup.row(btn)  
-         await message.answer(value, reply_markup=markup)
+         await message.answer("", reply_markup=markup)
+         
+     elif request == sba_menu[2]:
+         for key, value in courses_el.items():    
+            btn = types.InlineKeyboardButton(value, web_app=WebAppInfo(url=f"https://makcumys007.github.io/itkbl.github.io/employeid.html?sba={key}"))
+            markup.row(btn)  
+         await message.answer("", reply_markup=markup)
     
  
 
